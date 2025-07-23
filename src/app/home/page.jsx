@@ -14,7 +14,7 @@ import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white overflow-x-hidde">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white overflow-x-hidden">
       <Header />
       <HeroSection />
       <RankingSection />

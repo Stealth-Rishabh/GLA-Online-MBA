@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { TrendingUp, ChevronRight } from "lucide-react";
+import { TrendingUp, ChevronRight, DollarSign, Users, Settings, Globe, Smartphone, BarChart3, Lightbulb } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 const ProgrammesSection = () => {
@@ -14,6 +14,7 @@ const ProgrammesSection = () => {
         "Master digital marketing strategies, brand management, and consumer behavior analysis",
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: TrendingUp,
     },
     {
       title: "Financial Management",
@@ -21,6 +22,7 @@ const ProgrammesSection = () => {
         "Develop expertise in corporate finance, investment strategies, and financial analysis",
       image:
         "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: DollarSign,
     },
     {
       title: "Human Resource Management",
@@ -28,6 +30,7 @@ const ProgrammesSection = () => {
         "Learn talent acquisition, organizational behavior, and strategic HR planning",
       image:
         "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Users,
     },
     {
       title: "Operations Management",
@@ -35,6 +38,7 @@ const ProgrammesSection = () => {
         "Optimize business processes, supply chain management, and quality control systems",
       image:
         "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Settings,
     },
     {
       title: "International Business",
@@ -42,6 +46,7 @@ const ProgrammesSection = () => {
         "Navigate global markets, cross-cultural management, and international trade strategies",
       image:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Globe,
     },
     {
       title: "Digital Marketing",
@@ -49,6 +54,7 @@ const ProgrammesSection = () => {
         "Master SEO, social media marketing, content strategy, and digital analytics",
       image:
         "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Smartphone,
     },
     {
       title: "Business Analytics",
@@ -56,6 +62,7 @@ const ProgrammesSection = () => {
         "Harness data science, predictive modeling, and business intelligence tools",
       image:
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: BarChart3,
     },
     {
       title: "Entrepreneurship",
@@ -63,6 +70,7 @@ const ProgrammesSection = () => {
         "Build startups, innovation management, and venture capital fundamentals",
       image:
         "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Lightbulb,
     },
   ];
 
@@ -128,7 +136,7 @@ const ProgrammesSection = () => {
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
-                      <TrendingUp className="w-6 h-6 text-emerald-600" />
+                      <spec.icon className="w-6 h-6 text-emerald-600" />
                     </motion.div>
                     <h4 className="font-bold text-slate-800 text-lg mb-2">
                       {spec.title}
@@ -136,22 +144,7 @@ const ProgrammesSection = () => {
                     <p className="text-slate-600 text-sm leading-relaxed mb-4">
                       {spec.description}
                     </p>
-                    <motion.div
-                      className="flex items-center justify-center text-emerald-600 group-hover:text-emerald-700 transition-colors"
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <span className="text-sm font-medium">Learn More</span>
-                      <motion.div
-                        animate={{ x: [0, 3, 0] }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Number.POSITIVE_INFINITY,
-                        }}
-                      >
-                        <ChevronRight className="w-4 h-4 ml-1" />
-                      </motion.div>
-                    </motion.div>
+                    
                   </div>
                 </CardContent>
               </Card>

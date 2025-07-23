@@ -4,125 +4,279 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { CheckCircle, ArrowRight, FileText, CreditCard, GraduationCap, Monitor, BookOpen, UserCheck } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 const JourneySection = () => {
   const phases = [
     {
       phase: "01",
-      title: "Foundation Phase",
-      subtitle: "Months 1-8",
+      title: "Registration Phase",
+      subtitle: "Register yourself",
       description:
-        "Build unshakeable business fundamentals with core subjects that form the backbone of modern management.",
-      gradient: "linear-gradient(135deg, #10b981, #059669)",
+        "Start your journey by registering yourself and getting access to our comprehensive learning platform.",
+      gradient: "linear-gradient(135deg, #f97316, #ea580c)",
       items: [
         {
-          icon: "📊",
-          title: "Management Fundamentals",
-          desc: "Core principles of modern business management",
+          icon: "👤",
+          title: "Create Your Profile",
+          desc: "Set up your personal learning profile and preferences",
         },
         {
-          icon: "💰",
-          title: "Business Economics",
-          desc: "Economic theories applied to business decisions",
+          icon: "📋",
+          title: "Choose Your Path",
+          desc: "Select your specialization and learning track",
         },
         {
-          icon: "📈",
-          title: "Quantitative Methods",
-          desc: "Statistical tools for business analytics",
+          icon: "📝",
+          title: "Assessment Test",
+          desc: "Take initial assessment to customize your learning",
         },
         {
-          icon: "⚖️",
-          title: "Business Ethics",
-          desc: "Ethical frameworks for responsible leadership",
+          icon: "🎯",
+          title: "Set Goals",
+          desc: "Define your career objectives and milestones",
         },
       ],
       image:
-        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&crop=center&q=80",
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&crop=center&q=80",
       stats: [
-        { value: "95%", label: "Completion Rate" },
-        { value: "4.9/5", label: "Student Rating" },
+        { value: "01", label: "Step" },
+        { value: "5min", label: "Setup Time" },
       ],
       order: "order-2 lg:order-1",
       imageOrder: "order-1 lg:order-2",
     },
     {
       phase: "02",
-      title: "Specialization Phase",
-      subtitle: "Months 9-16",
+      title: "Application Phase",
+      subtitle: "Submit your application",
       description:
-        "Deep dive into your chosen domain with advanced courses and industry-specific expertise.",
-      gradient: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+        "Complete your application with required documents and submit for review by our admission team.",
+      gradient: "linear-gradient(135deg, #ec4899, #be185d)",
       items: [
         {
+          icon: "📄",
+          title: "Document Upload",
+          desc: "Submit all required academic and professional documents",
+        },
+        {
+          icon: "💼",
+          title: "Work Experience",
+          desc: "Detail your professional background and achievements",
+        },
+        {
+          icon: "📝",
+          title: "Statement of Purpose",
+          desc: "Write your motivation and career aspirations",
+        },
+        {
           icon: "🎯",
-          title: "Advanced Specialization",
-          desc: "Deep expertise in your chosen field",
-        },
-        {
-          icon: "📋",
-          title: "Industry Case Studies",
-          desc: "Real-world business scenarios and solutions",
-        },
-        {
-          icon: "🔬",
-          title: "Research Projects",
-          desc: "Independent research in specialized areas",
-        },
-        {
-          icon: "👥",
-          title: "Peer Collaboration",
-          desc: "Group projects with industry professionals",
+          title: "Application Review",
+          desc: "Our team reviews your complete application",
         },
       ],
       image:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&crop=center&q=80",
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop&crop=center&q=80",
       stats: [
-        { value: "8+", label: "Specializations" },
-        { value: "100+", label: "Case Studies" },
+        { value: "02", label: "Step" },
+        { value: "24hrs", label: "Review Time" },
       ],
       order: "order-1 lg:order-2",
       imageOrder: "order-2 lg:order-1",
     },
     {
       phase: "03",
-      title: "Application Phase",
-      subtitle: "Months 17-24",
+      title: "Payment Phase",
+      subtitle: "Pay your fee",
       description:
-        "Apply your expertise through capstone projects and real-world business challenges.",
-      gradient: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+        "Secure your seat by completing the fee payment through our secure payment gateway with flexible options.",
+      gradient: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
       items: [
         {
-          icon: "🚀",
-          title: "Capstone Project",
-          desc: "Comprehensive business solution development",
+          icon: "💳",
+          title: "Multiple Payment Options",
+          desc: "Credit card, debit card, UPI, and bank transfer",
         },
         {
-          icon: "💼",
-          title: "Industry Internship",
-          desc: "Hands-on experience with leading companies",
+          icon: "🔒",
+          title: "Secure Gateway",
+          desc: "SSL encrypted payment processing for safety",
         },
         {
-          icon: "🎓",
-          title: "Career Placement",
-          desc: "Dedicated placement support and guidance",
+          icon: "📊",
+          title: "Installment Plans",
+          desc: "Flexible EMI options available for easy payments",
         },
         {
-          icon: "🌐",
-          title: "Alumni Network",
-          desc: "Lifetime access to professional network",
+          icon: "🧾",
+          title: "Payment Confirmation",
+          desc: "Instant receipt and enrollment confirmation",
         },
       ],
       image:
-        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&crop=center&q=80",
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop&crop=center&q=80",
       stats: [
-        { value: "₹12L", label: "Avg Package" },
-        { value: "500+", label: "Recruiters" },
+        { value: "03", label: "Step" },
+        { value: "100%", label: "Secure" },
       ],
       order: "order-2 lg:order-1",
       imageOrder: "order-1 lg:order-2",
     },
+    {
+      phase: "04",
+      title: "Verification Phase",
+      subtitle: "Get your documents verified",
+      description:
+        "Our verification team will authenticate your documents and credentials to ensure program eligibility.",
+      gradient: "linear-gradient(135deg, #6366f1, #4f46e5)",
+      items: [
+        {
+          icon: "🔍",
+          title: "Document Authentication",
+          desc: "Thorough verification of academic credentials",
+        },
+        {
+          icon: "✅",
+          title: "Background Check",
+          desc: "Professional background and experience validation",
+        },
+        {
+          icon: "📞",
+          title: "Reference Verification",
+          desc: "Contact provided references for confirmation",
+        },
+        {
+          icon: "📋",
+          title: "Eligibility Confirmation",
+          desc: "Final confirmation of program eligibility",
+        },
+      ],
+      image:
+        "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop&crop=center&q=80",
+      stats: [
+        { value: "04", label: "Step" },
+        { value: "48hrs", label: "Verification" },
+      ],
+      order: "order-1 lg:order-2",
+      imageOrder: "order-2 lg:order-1",
+    },
+    {
+      phase: "05",
+      title: "Access Phase",
+      subtitle: "Gain access to Learning Management System",
+      description:
+        "Get complete access to our advanced Learning Management System with all course materials and resources.",
+      gradient: "linear-gradient(135deg, #06b6d4, #0891b2)",
+      items: [
+        {
+          icon: "💻",
+          title: "LMS Dashboard",
+          desc: "Personalized dashboard with course progress tracking",
+        },
+        {
+          icon: "📚",
+          title: "Course Materials",
+          desc: "Access to lectures, readings, and assignments",
+        },
+        {
+          icon: "👥",
+          title: "Student Community",
+          desc: "Connect with peers and join study groups",
+        },
+        {
+          icon: "🎯",
+          title: "Progress Tracking",
+          desc: "Monitor your learning progress and achievements",
+        },
+      ],
+      image:
+        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&crop=center&q=80",
+      stats: [
+        { value: "05", label: "Step" },
+        { value: "24/7", label: "Access" },
+      ],
+      order: "order-2 lg:order-1",
+      imageOrder: "order-1 lg:order-2",
+    },
+    {
+      phase: "06",
+      title: "Assessment Phase",
+      subtitle: "Appear in Exams",
+      description:
+        "Demonstrate your knowledge through comprehensive assessments and examinations conducted throughout the program.",
+      gradient: "linear-gradient(135deg, #10b981, #059669)",
+      items: [
+        {
+          icon: "📝",
+          title: "Online Assessments",
+          desc: "Regular quizzes and assignments to test understanding",
+        },
+        {
+          icon: "⏰",
+          title: "Timed Examinations",
+          desc: "Proctored exams with flexible scheduling options",
+        },
+        {
+          icon: "📊",
+          title: "Performance Analytics",
+          desc: "Detailed feedback and performance insights",
+        },
+        {
+          icon: "🏆",
+          title: "Certification Exams",
+          desc: "Final assessments for program certification",
+        },
+      ],
+      image:
+        "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop&crop=center&q=80",
+      stats: [
+        { value: "06", label: "Step" },
+        { value: "90%", label: "Pass Rate" },
+      ],
+      order: "order-1 lg:order-2",
+      imageOrder: "order-2 lg:order-1",
+    },
+    {
+      phase: "07",
+      title: "Completion Phase",
+      subtitle: "Get your degree",
+      description:
+        "Graduate with your MBA degree and join our elite alumni network of successful business professionals.",
+      gradient: "linear-gradient(135deg, #059669, #047857)",
+      items: [
+        {
+          icon: "🎓",
+          title: "Graduation Ceremony",
+          desc: "Celebrate your achievement in our graduation ceremony",
+        },
+        {
+          icon: "📜",
+          title: "Official Degree",
+          desc: "Receive your accredited MBA degree certificate",
+        },
+        {
+          icon: "🌐",
+          title: "Alumni Network",
+          desc: "Lifetime access to our global alumni community",
+        },
+        {
+          icon: "💼",
+          title: "Career Support",
+          desc: "Ongoing career guidance and placement assistance",
+        },
+      ],
+      image:
+      
+        "https://images.unsplash.com/photo-1525921429624-479b6a26d84d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      stats: [
+        { value: "07", label: "Final Step" },
+        { value: "₹15L", label: "Avg Package" },
+      ],
+      order: "order-2 lg:order-1",
+      imageOrder: "order-1 lg:order-2",
+    },
+    
   ];
 
   return (
@@ -289,13 +443,13 @@ const JourneySection = () => {
                                     <h3 className="text-2xl lg:text-3xl font-bold mb-1">
                                       {phase.title}
                                     </h3>
-                                    <p className="text-emerald-100 text-lg">
+                                    <p className="text-white/80 text-lg">
                                       {phase.subtitle}
                                     </p>
                                   </div>
                                 </div>
 
-                                <p className="text-emerald-50 text-lg leading-relaxed">
+                                <p className="text-white/90 text-lg leading-relaxed">
                                   {phase.description}
                                 </p>
                               </div>
@@ -357,7 +511,7 @@ const JourneySection = () => {
                                         repeat: Number.POSITIVE_INFINITY,
                                       }}
                                     />
-                                    Duration: 8 Months
+                                    Step {phase.phase}
                                   </span>
                                   <span className="flex items-center">
                                     <motion.div
@@ -369,7 +523,7 @@ const JourneySection = () => {
                                         delay: 0.5,
                                       }}
                                     />
-                                    6 Core Subjects
+                                    {phase.subtitle}
                                   </span>
                                 </div>
                               </div>
@@ -401,7 +555,7 @@ const JourneySection = () => {
                       >
                         <motion.img
                           src={phase.image}
-                          alt={`${phase.title} learning environment`}
+                          alt={`${phase.title} process`}
                           className="w-full h-80 lg:h-96 object-cover"
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.7 }}
@@ -471,14 +625,14 @@ const JourneySection = () => {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
+                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
                   <motion.div
                     key={i}
-                    className="w-12 h-12 rounded-full border-4 border-white flex items-center justify-center text-white font-bold"
+                    className="w-12 h-12 rounded-full border-4 border-white flex items-center justify-center text-white font-bold text-sm"
                     style={{
                       background: `linear-gradient(135deg, ${
-                        i <= 2 ? "#34d399" : "#3b82f6"
-                      }, ${i <= 2 ? "#10b981" : "#1d4ed8"})`,
+                        i <= 3 ? "#f97316" : i <= 5 ? "#ec4899" : "#10b981"
+                      }, ${i <= 3 ? "#ea580c" : i <= 5 ? "#be185d" : "#059669"})`,
                     }}
                     whileHover={{ scale: 1.1, y: -2 }}
                     transition={{ type: "spring", stiffness: 300 }}

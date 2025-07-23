@@ -9,31 +9,49 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Priya Sharma",
-      role: "Marketing Manager, TCS",
+      name: "Shalini Chaudhry",
+      role: "Online MBA, Batch 2022–24",
       content:
-        "The Online MBA from GLA transformed my career. The flexibility allowed me to continue working while upgrading my skills.",
+        "Pursuing Online MBA program at GLA Online was one of the best decisions of my career. The interactive sessions and practical assignments enhanced my learning experience. GLA Online didn't just provide education but empowered me with the skills to excel. Highly recommended",
       rating: 5,
       image:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
     },
     {
-      name: "Rajesh Kumar",
-      role: "Business Analyst, Infosys",
+      name: "Anmol Nagpal",
+      role: "Online MBA, Current Student",
       content:
-        "Excellent curriculum and faculty support. The practical approach helped me apply concepts directly in my workplace.",
+        "Enrolling in the Online MBA program at GLA Online has been a transformative experience. I am thrilled to be part of the 2024‑26 batch, and I'm confident this program will be a cornerstone in my journey toward professional excellence.",
       rating: 5,
       image:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
     },
     {
-      name: "Anita Patel",
-      role: "HR Director, Wipro",
+      name: "Mukul",
+      role: "Online MBA, Batch 2023–25",
       content:
-        "The networking opportunities and industry connections made through this program are invaluable for career growth.",
+        "GLA Online's MBA program was a game‑changer for me! The support system, from doubt‑clearing to career guidance, was exceptional.",
       rating: 5,
       image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    },
+    {
+      name: "Deeksha Agrawal",
+      role: "Online MBA, Batch 2022–24",
+      content:
+        "The flexible learning environment, industry‑relevant curriculum, and exceptional faculty support made it possible for me to balance work and studies seamlessly. GLA Online truly empowered me with knowledge and confidence.",
+      rating: 5,
+      image:
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
+    },
+    {
+      name: "Ashwini Chaudhry",
+      role: "Online MBA, Batch 2024–26",
+      content:
+        "Studying MBA online from GLA University has been an enriching experience! The practical insights, coupled with academic excellence, have not only enhanced my business acumen but also broadened my perspective.",
+      rating: 5,
+      image:
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
     },
   ];
 

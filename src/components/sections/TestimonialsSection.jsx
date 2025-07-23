@@ -39,7 +39,7 @@ const TestimonialsSection = () => {
 
   return (
     <AnimatedSection className="py-20 bg-gradient-to-br from-slate-50 to-emerald-50">
-      <div className="container mx-auto px-4">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

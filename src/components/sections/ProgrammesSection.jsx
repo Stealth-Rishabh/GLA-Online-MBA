@@ -10,49 +10,65 @@ const ProgrammesSection = () => {
   const specializations = [
     {
       title: "Marketing Management",
-      description: "Master digital marketing strategies, brand management, and consumer behavior analysis",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center&q=80"
+      description:
+        "Master digital marketing strategies, brand management, and consumer behavior analysis",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center&q=80",
     },
     {
       title: "Financial Management",
-      description: "Develop expertise in corporate finance, investment strategies, and financial analysis",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop&crop=center&q=80"
+      description:
+        "Develop expertise in corporate finance, investment strategies, and financial analysis",
+      image:
+        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop&crop=center&q=80",
     },
     {
       title: "Human Resource Management",
-      description: "Learn talent acquisition, organizational behavior, and strategic HR planning",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=250&fit=crop&crop=center&q=80"
+      description:
+        "Learn talent acquisition, organizational behavior, and strategic HR planning",
+      image:
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=250&fit=crop&crop=center&q=80",
     },
     {
       title: "Operations Management",
-      description: "Optimize business processes, supply chain management, and quality control systems",
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=250&fit=crop&crop=center&q=80"
+      description:
+        "Optimize business processes, supply chain management, and quality control systems",
+      image:
+        "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=250&fit=crop&crop=center&q=80",
     },
     {
       title: "International Business",
-      description: "Navigate global markets, cross-cultural management, and international trade strategies",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop&crop=center&q=80"
+      description:
+        "Navigate global markets, cross-cultural management, and international trade strategies",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop&crop=center&q=80",
     },
     {
       title: "Digital Marketing",
-      description: "Master SEO, social media marketing, content strategy, and digital analytics",
-      image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=250&fit=crop&crop=center&q=80"
+      description:
+        "Master SEO, social media marketing, content strategy, and digital analytics",
+      image:
+        "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=250&fit=crop&crop=center&q=80",
     },
     {
       title: "Business Analytics",
-      description: "Harness data science, predictive modeling, and business intelligence tools",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop&crop=center&q=80"
+      description:
+        "Harness data science, predictive modeling, and business intelligence tools",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop&crop=center&q=80",
     },
     {
       title: "Entrepreneurship",
-      description: "Build startups, innovation management, and venture capital fundamentals",
-      image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&h=250&fit=crop&crop=center&q=80"
-    }
+      description:
+        "Build startups, innovation management, and venture capital fundamentals",
+      image:
+        "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&h=250&fit=crop&crop=center&q=80",
+    },
   ];
 
   return (
     <AnimatedSection className="py-20 bg-gradient-to-br from-slate-50 to-emerald-50">
-      <div className="container mx-auto px-4">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

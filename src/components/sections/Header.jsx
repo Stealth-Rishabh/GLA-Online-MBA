@@ -14,7 +14,7 @@ const Header = () => {
       className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50"
       style={{ backdropFilter: "blur(12px)" }}
     >
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <motion.div
             className="w-12 h-12 bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg flex items-center justify-center"

@@ -7,12 +7,11 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 const RecruitersSection = () => {
   const recruiters = [
-    
     {
       name: "Infosys",
       logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg",
     },
-   
+
     {
       name: "Accenture",
       logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg",
@@ -33,7 +32,6 @@ const RecruitersSection = () => {
       name: "Google",
       logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
     },
-   
   ];
 
   const stats = [
@@ -59,7 +57,7 @@ const RecruitersSection = () => {
 
   return (
     <AnimatedSection className="py-20 bg-gradient-to-br from-slate-50 to-emerald-50">
-      <div className="container mx-auto px-4">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

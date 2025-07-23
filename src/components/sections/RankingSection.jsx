@@ -36,7 +36,7 @@ const RankingSection = () => {
 
   return (
     <AnimatedSection className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

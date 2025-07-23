@@ -143,7 +143,7 @@ const JourneySection = () => {
         />
       </motion.div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}

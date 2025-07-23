@@ -32,7 +32,7 @@ const WhyGLASection = () => {
   ];
 
   return (
-    <AnimatedSection className="py-20 bg-white">
+    <AnimatedSection className="py-10 sm:py-20 bg-white">
       <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div

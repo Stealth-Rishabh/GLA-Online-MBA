@@ -33,7 +33,7 @@ const HeroSection = () => {
         animate={{ scale: 1 }}
         transition={{ duration: 10, ease: "easeOut" }}
       />
-      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4 py-12 lg:py-20 relative z-10">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4 py-12 lg:py-10 sm:py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -156,7 +156,7 @@ const HeroSection = () => {
               transition={{ delay: 1.2, duration: 0.6 }}
             >
               {[
-                { value: 15000, label: "Alumni Network", suffix: "+" },
+                { value: "15K", label: "Alumni Network", suffix: "+" },
                 { value: 98, label: "Placement Rate", suffix: "%" },
                 { value: 4.8, label: "Student Rating", suffix: "" },
               ].map((stat, index) => (
@@ -164,7 +164,7 @@ const HeroSection = () => {
                   key={index}
                   className="text-center bg-green-500/10 outline-2 outline-emerald-500 outline-offset-2 backdrop-blur-3xl rounded-2xl p-6 shadow-lg hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="text-3xl font-bold text-emerald-400">
+                  <div className="text-2xl sm:text-3xl font-bold text-emerald-400">
                     {stat.value}
                     {stat.suffix}
                   </div>
@@ -192,7 +192,7 @@ const LeadGenerationForm = () => {
     coursesid: "OGLAMBA201",
     state: "",
     city: "",
-    page: "amity",
+    page: "glaOnlineMBA",
   });
 
   const [errors, setErrors] = useState({});
@@ -320,7 +320,7 @@ const LeadGenerationForm = () => {
       const sanitizedFormData = {
         ...formData,
         city: formData.city.replace(/\s/g, ""),
-        page: "amity",
+        page: "glaOnlineMBA",
       };
 
       // PARALLEL API CALLS for faster submission
@@ -361,7 +361,7 @@ const LeadGenerationForm = () => {
           coursesid: "OGLAMBA201",
           state: "",
           city: "",
-          page: "amity",
+          page: "glaOnlineMBA",
         });
         setErrors({});
         window.location.href = "/thankyou.html";
@@ -402,7 +402,7 @@ const LeadGenerationForm = () => {
         transition={{ type: "spring", stiffness: 300 }}
       >
         <Card
-          className="py-0 w-full max-w-md border-0 rounded-2xl overflow-hidden bg-white"
+          className="py-0 w-full  sm:max-w-md border-0 rounded-2xl overflow-hidden bg-white"
           style={{
             background: "linear-gradient(135deg, #f8fafc 60%, #d1fae5 100%)",
             backdropFilter: "blur(10px)",

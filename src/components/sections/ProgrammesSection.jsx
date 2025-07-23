@@ -3,7 +3,17 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { TrendingUp, ChevronRight, DollarSign, Users, Settings, Globe, Smartphone, BarChart3, Lightbulb } from "lucide-react";
+import {
+  TrendingUp,
+  ChevronRight,
+  DollarSign,
+  Users,
+  Settings,
+  Globe,
+  Smartphone,
+  BarChart3,
+  Lightbulb,
+} from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 const ProgrammesSection = () => {
@@ -75,7 +85,7 @@ const ProgrammesSection = () => {
   ];
 
   return (
-    <AnimatedSection className="py-20 bg-gradient-to-br from-slate-50 to-emerald-50">
+    <AnimatedSection className="py-10 sm:py-20 bg-gradient-to-br from-slate-50 to-emerald-50">
       <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
@@ -144,7 +154,6 @@ const ProgrammesSection = () => {
                     <p className="text-slate-600 text-sm leading-relaxed mb-4">
                       {spec.description}
                     </p>
-                    
                   </div>
                 </CardContent>
               </Card>

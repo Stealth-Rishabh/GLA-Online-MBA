@@ -14,7 +14,7 @@ const CTASection = () => {
   ];
 
   return (
-    <AnimatedSection className="py-20 bg-gradient-to-br from-slate-900 to-emerald-900 text-white">
+    <AnimatedSection className="py-10 sm:py-20 bg-gradient-to-br from-slate-900 to-emerald-900 text-white">
       <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4 text-center">
         <motion.h2
           className="text-4xl md:text-5xl font-bold mb-6"

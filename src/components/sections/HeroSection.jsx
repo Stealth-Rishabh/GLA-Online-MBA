@@ -22,7 +22,7 @@ import { getAllStates, getCitiesForState } from "@/lib/stateData";
 
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white sm:h-[calc(100vh-100px)] flex items-center">
       <motion.div
         className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{
@@ -42,7 +42,7 @@ const HeroSection = () => {
             className="space-y-8"
           >
             <div className="space-y-6">
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
@@ -50,7 +50,7 @@ const HeroSection = () => {
                 <Badge className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-medium">
                   🎓 Admissions Open 2025
                 </Badge>
-              </motion.div>
+              </motion.div> */}
 
               <motion.h1
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
@@ -80,7 +80,7 @@ const HeroSection = () => {
                   Online MBA
                 </motion.span>
               </motion.h1>
-
+{/* 
               <motion.p
                 className="text-xl text-slate-300 leading-relaxed max-w-2xl"
                 initial={{ opacity: 0, y: 20 }}
@@ -90,10 +90,39 @@ const HeroSection = () => {
                 Transform your professional journey with India's most flexible
                 and industry-relevant MBA program. Designed for working
                 professionals who refuse to compromise on their ambitions.
-              </motion.p>
-            </div>
+              </motion.p> */}
 
             <motion.div
+              className="bg-gradient-to-r from-emerald-100 to-green-50 border-l-4 border-l-emerald-500 border border-emerald-200 rounded-xl p-5 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <div className="flex items-start gap-3 animate-pulse">
+                {/*  */}
+                <div>
+                  <motion.h3 
+                    className="text-emerald-700 font-bold text-2xl mb-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                  >
+                    🎓 ADMISSIONS OPEN 2025 - Limited Seats!
+                  </motion.h3>
+                  <motion.p 
+                    className="text-emerald-600 text-base leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2, duration: 0.5 }}
+                  >
+                    Premium MBA education with flexible learning for ambitious professionals.
+                  </motion.p>
+                </div>
+              </div>
+            </motion.div>
+            </div>
+
+            {/* <motion.div
               className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -147,10 +176,10 @@ const HeroSection = () => {
                   Watch Demo
                 </Button>
               </motion.div>
-            </motion.div>
+            </motion.div> */}
 
             <motion.div
-              className="flex items-center space-x-8 pt-8"
+              className="flex items-center space-x-8 pt-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}

@@ -24,7 +24,7 @@ const HeroSection = () => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white sm:h-[calc(100vh-100px)] flex items-center">
       <motion.div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
+        className="absolute inset-0 bg-center bg-cover opacity-20"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1611095973763-414019e72400?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
@@ -33,8 +33,8 @@ const HeroSection = () => {
         animate={{ scale: 1 }}
         transition={{ duration: 10, ease: "easeOut" }}
       />
-      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4 py-12 lg:py-10 sm:py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 px-4 py-12 mx-auto sm:max-w-6xl md:max-w-7xl lg:py-10 sm:py-20">
+        <div className="grid gap-0 sm:gap-12 items-center lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -47,13 +47,13 @@ const HeroSection = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <Badge className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-medium">
+                <Badge className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700">
                   🎓 Admissions Open 2025
                 </Badge>
               </motion.div> */}
 
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -61,7 +61,7 @@ const HeroSection = () => {
                 <span className="text-slate-200">Elevate Your Career</span>
                 <br />
                 <motion.span
-                  className="bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent"
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-300"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
@@ -72,7 +72,7 @@ const HeroSection = () => {
                 <span className="text-slate-200">with Our</span>
 
                 <motion.span
-                  className="text-emerald-400 ml-3"
+                  className="ml-3 text-emerald-400"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.7, duration: 0.6 }}
@@ -80,9 +80,9 @@ const HeroSection = () => {
                   Online MBA
                 </motion.span>
               </motion.h1>
-{/* 
+              {/* 
               <motion.p
-                className="text-xl text-slate-300 leading-relaxed max-w-2xl"
+                className="max-w-2xl text-xl leading-relaxed text-slate-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
@@ -92,38 +92,39 @@ const HeroSection = () => {
                 professionals who refuse to compromise on their ambitions.
               </motion.p> */}
 
-            <motion.div
-              className="bg-gradient-to-r from-emerald-100 to-green-50 border-l-4 border-l-emerald-500 border border-emerald-200 rounded-xl p-5 max-w-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-            >
-              <div className="flex items-start gap-3 animate-pulse">
-                {/*  */}
-                <div>
-                  <motion.h3 
-                    className="text-emerald-700 font-bold text-2xl mb-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 0.5 }}
-                  >
-                    🎓 ADMISSIONS OPEN 2025 - Limited Seats!
-                  </motion.h3>
-                  <motion.p 
-                    className="text-emerald-600 text-base leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2, duration: 0.5 }}
-                  >
-                    Premium MBA education with flexible learning for ambitious professionals.
-                  </motion.p>
+              <motion.div
+                className="p-5 w-full max-w-2xl bg-gradient-to-r from-emerald-100 to-green-50 rounded-xl border border-l-4 border-emerald-200 border-l-emerald-500"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+              >
+                <div className="flex gap-3 items-start animate-pulse">
+                  {/*  */}
+                  <div>
+                    <motion.h3
+                      className="mb-2 font-bold text-emerald-700 sm:text-2xl"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1, duration: 0.5 }}
+                    >
+                      🎓 ADMISSIONS OPEN 2025 - Limited Seats!
+                    </motion.h3>
+                    <motion.p
+                      className="text-base leading-relaxed text-emerald-600"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.2, duration: 0.5 }}
+                    >
+                      Premium MBA education with flexible learning for ambitious
+                      professionals.
+                    </motion.p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
             </div>
 
             {/* <motion.div
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col gap-4 sm:flex-row"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
@@ -135,7 +136,7 @@ const HeroSection = () => {
               >
                 <Button
                   size="lg"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg"
+                  className="px-8 py-4 text-lg font-semibold text-white bg-emerald-600 rounded-xl shadow-lg hover:bg-emerald-700"
                   style={{
                     background: "linear-gradient(135deg, #059669, #10b981)",
                     boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
@@ -162,7 +163,7 @@ const HeroSection = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-slate-900 px-8 py-4 text-lg font-semibold rounded-xl bg-transparent"
+                  className="px-8 py-4 text-lg font-semibold text-emerald-400 bg-transparent rounded-xl border-2 border-emerald-400 hover:bg-emerald-400 hover:text-slate-900"
                 >
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
@@ -179,7 +180,7 @@ const HeroSection = () => {
             </motion.div> */}
 
             <motion.div
-              className="flex items-center space-x-8 pt-2"
+              className="hidden items-center pt-2 space-x-8 sm:flex"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}
@@ -191,9 +192,9 @@ const HeroSection = () => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center bg-green-500/10 outline-2 outline-emerald-500 outline-offset-2 backdrop-blur-3xl rounded-2xl p-6 shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  className="p-6 text-center rounded-2xl shadow-lg backdrop-blur-3xl transition-all duration-300 bg-green-500/10 outline-2 outline-emerald-500 outline-offset-2 hover:-translate-y-1"
                 >
-                  <div className="text-2xl sm:text-3xl font-bold text-emerald-400">
+                  <div className="text-2xl font-bold text-emerald-400 sm:text-3xl">
                     {stat.value}
                     {stat.suffix}
                   </div>
@@ -431,7 +432,7 @@ const LeadGenerationForm = () => {
         transition={{ type: "spring", stiffness: 300 }}
       >
         <Card
-          className="py-0 w-full  sm:max-w-md border-0 rounded-2xl overflow-hidden bg-white"
+          className="overflow-hidden py-0 w-full bg-white rounded-2xl border-0 sm:max-w-md"
           style={{
             background: "linear-gradient(135deg, #f8fafc 60%, #d1fae5 100%)",
             backdropFilter: "blur(10px)",
@@ -440,12 +441,12 @@ const LeadGenerationForm = () => {
         >
           <CardContent className="p-8">
             <motion.div
-              className="text-center mb-6"
+              className="mb-6 text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <h3 className="text-2xl font-bold text-slate-800 mb-2">
+              <h3 className="mb-2 text-2xl font-bold text-slate-800">
                 Begin Your Transformation
               </h3>
               <p className="text-emerald-700">
@@ -463,11 +464,11 @@ const LeadGenerationForm = () => {
                 >
                   <Label
                     htmlFor={field.name}
-                    className="text-slate-700 font-medium"
+                    className="font-medium text-slate-700"
                   >
                     {field.label}
                     {field.required && (
-                      <span className="text-red-500 ml-1">*</span>
+                      <span className="ml-1 text-red-500">*</span>
                     )}
                   </Label>
                   <motion.div
@@ -496,7 +497,7 @@ const LeadGenerationForm = () => {
                     />
                   </motion.div>
                   {errors[field.name] && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="mt-1 text-sm text-red-500">
                       {errors[field.name]}
                     </p>
                   )}
@@ -510,9 +511,9 @@ const LeadGenerationForm = () => {
                 transition={{ delay: 0.7, duration: 0.5 }}
               >
                 <div>
-                  <Label className="text-slate-700 font-medium">
+                  <Label className="font-medium text-slate-700">
                     State
-                    <span className="text-red-500 ml-1">*</span>
+                    <span className="ml-1 text-red-500">*</span>
                   </Label>
                   <Select
                     value={formData.state}
@@ -534,14 +535,14 @@ const LeadGenerationForm = () => {
                     </SelectContent>
                   </Select>
                   {errors.state && (
-                    <p className="text-red-500 text-sm mt-1">{errors.state}</p>
+                    <p className="mt-1 text-sm text-red-500">{errors.state}</p>
                   )}
                 </div>
 
                 <div>
-                  <Label className="text-slate-700 font-medium">
+                  <Label className="font-medium text-slate-700">
                     City
-                    <span className="text-red-500 ml-1">*</span>
+                    <span className="ml-1 text-red-500">*</span>
                   </Label>
                   <Select
                     value={formData.city}
@@ -564,7 +565,7 @@ const LeadGenerationForm = () => {
                     </SelectContent>
                   </Select>
                   {errors.city && (
-                    <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                    <p className="mt-1 text-sm text-red-500">{errors.city}</p>
                   )}
                 </div>
               </motion.div>
@@ -579,7 +580,7 @@ const LeadGenerationForm = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full text-white py-3 rounded-lg font-semibold text-lg shadow-lg disabled:opacity-50"
+                  className="py-3 w-full text-lg font-semibold text-white rounded-lg shadow-lg disabled:opacity-50"
                   style={{
                     background: isLoading
                       ? "#94a3b8"
@@ -594,10 +595,10 @@ const LeadGenerationForm = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="flex items-center justify-center"
+                        className="flex justify-center items-center"
                       >
                         <motion.div
-                          className="rounded-full h-5 w-5 border-b-2 border-white mr-2"
+                          className="mr-2 w-5 h-5 rounded-full border-b-2 border-white"
                           animate={{ rotate: 360 }}
                           transition={{
                             duration: 1,
@@ -613,7 +614,7 @@ const LeadGenerationForm = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="flex items-center justify-center"
+                        className="flex justify-center items-center"
                       >
                         Get Program Details
                         <motion.div
@@ -633,7 +634,7 @@ const LeadGenerationForm = () => {
             </form>
 
             <motion.div
-              className="text-center mt-4"
+              className="mt-4 text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.5 }}

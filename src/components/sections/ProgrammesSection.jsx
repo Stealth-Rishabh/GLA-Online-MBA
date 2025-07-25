@@ -55,7 +55,7 @@ const ProgrammesSection = () => {
       description:
         "Navigate global markets, cross-cultural management, and international trade strategies",
       image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop&crop=center&q=80",
+        "https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=800&h=600&fit=crop&crop=center",
       icon: Globe,
     },
     {
@@ -115,11 +115,12 @@ const ProgrammesSection = () => {
               className="group cursor-pointer"
             >
               <Card
-                className="py-0 h-full bg-white border-0 rounded-2xl overflow-hidden transition-all duration-300"
+                className="py-0 h-full bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border-0 rounded-2xl overflow-hidden transition-all duration-300 group"
                 style={{
-                  boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
+                  boxShadow: "0 10px 25px rgba(0, 0, 0, 0.08)",
                   "&:hover": {
-                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
+                    boxShadow:
+                      "0 20px 40px rgba(0, 0, 0, 0.12), 0 0 20px rgba(16, 185, 129, 0.3), 0 0 40px rgba(16, 185, 129, 0.1)",
                   },
                 }}
               >
@@ -127,8 +128,8 @@ const ProgrammesSection = () => {
                   <div className="relative mb-4 overflow-hidden rounded-lg">
                     <motion.img
                       src={spec.image}
-                      alt={spec}
-                      className="w-full h-32 object-cover"
+                      alt={spec.title}
+                      className="w-full h-40 object-cover"
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.3 }}
                     />
@@ -139,15 +140,15 @@ const ProgrammesSection = () => {
                           "linear-gradient(to top, rgba(0,0,0,0.5), transparent)",
                       }}
                     />
-                  </div>
-                  <div className="text-center">
                     <motion.div
-                      className="w-12 h-12 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-lg flex items-center justify-center mx-auto mb-3"
+                      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-emerald-100 to-emerald-200 opacity-80 rounded-lg flex items-center justify-center shadow-lg"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <spec.icon className="w-6 h-6 text-emerald-600" />
                     </motion.div>
+                  </div>
+                  <div className="text-center">
                     <h4 className="font-bold text-slate-800 text-lg mb-2">
                       {spec.title}
                     </h4>

@@ -33,18 +33,18 @@ const WhyGLASection = () => {
 
   return (
     <AnimatedSection className="py-10 sm:py-20 bg-white">
-      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center ">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-              About <span className="text-emerald-600">GLA Online MBA</span>
+            <h2 className="text-4xl md:text-5xl text-center sm:text-left font-bold text-slate-800 mb-6">
+              About <span className="text-emerald-600 block sm:inline">GLA Online MBA</span>
             </h2>
-            <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+            <p className="text-xl text-slate-600 mb-8 leading-relaxed text-center sm:text-left">
               Experience world-class education designed for the modern
               professional. Our program combines academic excellence with
               practical industry insights.

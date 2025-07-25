@@ -4,8 +4,323 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, FileText, CreditCard, GraduationCap, Monitor, BookOpen, UserCheck } from "lucide-react";
+import { CheckCircle, ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+
+// Animation configurations
+const animations = {
+  card: {
+    initial: { opacity: 0, x: -100 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+  cardAlt: {
+    initial: { opacity: 0, x: 100 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+  item: {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { delay: 0.1, duration: 0.5 },
+  },
+  stat: {
+    initial: { opacity: 0, scale: 0.8, y: 20 },
+    whileInView: { opacity: 1, scale: 1, y: 0 },
+    transition: { delay: 0.5, duration: 0.6 },
+  },
+};
+
+// Reusable components
+const PhaseCard = ({ phase, index, children }) => (
+  <motion.div
+    key={index}
+    {...(index % 2 === 0 ? animations.card : animations.cardAlt)}
+    viewport={{ once: true }}
+    className="relative"
+  >
+    <div className="grid gap-12 items-center lg:grid-cols-2">
+      <div className={` ${phase.order}`}>
+        <div className="relative">
+          <motion.div
+            className="absolute -inset-4 rounded-3xl opacity-50 blur-xl"
+            style={{
+              background: "linear-gradient(135deg, #ecfdf5, #d1fae5)",
+            }}
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+            }}
+          />
+          <motion.div
+            whileHover={{ y: -5, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Card
+              className="overflow-hidden relative py-0 bg-white rounded-3xl border-0 transition-all duration-500 group "
+              style={{
+                boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
+              }}
+            >
+              <CardContent className="p-0">{children}</CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className={`${phase.imageOrder} `}>
+        <div className="relative group">
+          <motion.div
+            className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl"
+            style={{
+              background: "linear-gradient(135deg, #34d399, #3b82f6)",
+            }}
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+            }}
+          />
+          <motion.div
+            className="overflow-hidden relative rounded-3xl shadow-2xl"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.img
+              src={phase.image}
+              alt={`${phase.title} process`}
+              className="object-cover w-full h-80 lg:h-96"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.7 }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.4), transparent)",
+              }}
+            />
+
+            {/* Floating Stats */}
+            {phase.stats.map((stat, statIndex) => (
+              <motion.div
+                key={statIndex}
+                {...animations.stat}
+                viewport={{ once: true }}
+                className={`absolute p-4 rounded-2xl shadow-lg ${
+                  statIndex === 0 ? "top-6 right-6" : "bottom-6 left-6"
+                }`}
+                style={{
+                  background: "rgba(255, 255, 255, 0.95)",
+                  backdropFilter: "blur(10px)",
+                }}
+                whileHover={{ scale: 1.05, y: -5 }}
+              >
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-emerald-600">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs font-medium text-slate-600">
+                    {stat.label}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
+const CardHeader = ({ phase }) => (
+  <div
+    className="overflow-hidden relative p-8 text-white"
+    style={{ background: phase.gradient }}
+  >
+    <motion.div
+      className="absolute top-0 right-0 -mt-16 -mr-16 w-32 h-32 rounded-full"
+      style={{ background: "rgba(255, 255, 255, 0.1)" }}
+      animate={{ rotate: 360 }}
+      transition={{
+        duration: 20,
+        repeat: Number.POSITIVE_INFINITY,
+        ease: "linear",
+      }}
+    />
+    <motion.div
+      className="absolute bottom-0 left-0 -mb-12 -ml-12 w-24 h-24 rounded-full"
+      style={{ background: "rgba(255, 255, 255, 0.1)" }}
+      animate={{ rotate: -360 }}
+      transition={{
+        duration: 15,
+        repeat: Number.POSITIVE_INFINITY,
+        ease: "linear",
+      }}
+    />
+
+    <div className="relative z-10">
+      <div className="flex items-center mb-4">
+        <motion.div
+          className="flex justify-center items-center mr-6 w-16 h-16 rounded-2xl"
+          style={{
+            background: "rgba(255, 255, 255, 0.2)",
+            backdropFilter: "blur(10px)",
+          }}
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <span className="text-2xl font-bold text-white">{phase.phase}</span>
+        </motion.div>
+        <div>
+          <h3 className="mb-1 text-2xl font-bold lg:text-3xl">{phase.title}</h3>
+          <p className="text-lg text-white/80">{phase.subtitle}</p>
+        </div>
+      </div>
+
+      <p className="text-lg leading-relaxed text-white/90">
+        {phase.description}
+      </p>
+    </div>
+  </div>
+);
+
+const CardBody = ({ phase }) => (
+  <div className="p-5">
+    <div className="grid grid-cols-1 gap-0">
+      {phase.items.map((item, idx) => (
+        <motion.div
+          key={idx}
+          {...animations.item}
+          viewport={{ once: true }}
+          className="flex items-start p-4 space-x-4 rounded-xl transition-colors duration-300 hover:bg-emerald-50 group/item"
+          whileHover={{ x: 5 }}
+        >
+          <motion.div
+            className="text-2xl"
+            whileHover={{ scale: 1.2, rotate: 10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            {item.icon}
+          </motion.div>
+          <div className="flex-1">
+            <h4 className="mb-1 font-semibold transition-colors text-slate-800 group-hover/item:text-emerald-600">
+              {item.title}
+            </h4>
+            <p className="text-sm leading-relaxed text-slate-600">
+              {item.desc}
+            </p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileHover={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <CheckCircle className="w-5 h-5 text-emerald-500" />
+          </motion.div>
+        </motion.div>
+      ))}
+    </div>
+
+    <div className="pt-6 mt- border-t border-slate-100">
+      <div className="flex justify-between items-center text-sm text-slate-500">
+        <span className="flex items-center">
+          <motion.div
+            className="mr-2 w-2 h-2 bg-emerald-500 rounded-full"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+            }}
+          />
+          Step {phase.phase}
+        </span>
+        <span className="flex items-center">
+          <motion.div
+            className="mr-2 w-2 h-2 bg-blue-500 rounded-full"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              delay: 0.5,
+            }}
+          />
+          {phase.subtitle}
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
+const BottomCTA = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, delay: 0.3 }}
+    viewport={{ once: true }}
+    className="mt-20 text-center "
+  >
+    <motion.div
+      className="flex flex-col sm:flex-row items-center justify-around p-8 gap-8 rounded-3xl border border-emerald-100  w-full"
+      style={{
+        background: "linear-gradient(135deg, #ecfdf5, #dbeafe)",
+      }}
+      whileHover={{ scale: 1.02, y: -5 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <div className="flex -space-x-2">
+        {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+          <motion.div
+            key={i}
+            className="flex justify-center items-center w-12 h-12 text-sm font-bold text-white rounded-full border-4 border-white"
+            style={{
+              background: `linear-gradient(135deg, ${
+                i <= 3 ? "#f97316" : i <= 5 ? "#ec4899" : "#10b981"
+              }, ${i <= 3 ? "#ea580c" : i <= 5 ? "#be185d" : "#059669"})`,
+            }}
+            whileHover={{ scale: 1.1, y: -2 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            {i}
+          </motion.div>
+        ))}
+      </div>
+      <div className="text-center">
+        <h4 className="mb-1 text-2xl sm:text-3xl font-light sm:font-bold text-emerald-900">
+          Ready to Begin Your Journey?
+        </h4>
+        <p className="text-slate-600">
+          Join 15,000+ professionals who transformed their careers
+        </p>
+      </div>
+      <motion.div
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <Button
+          className="px-10 py-6 font-semibold text-white rounded-xl shadow-lg"
+          style={{
+            background: "linear-gradient(135deg, #059669, #3b82f6)",
+            boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
+          }}
+        >
+          Start Application
+          <motion.div
+            animate={{ x: [0, 5, 0] }}
+            transition={{
+              duration: 1.5,
+              repeat: Number.POSITIVE_INFINITY,
+            }}
+          >
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </motion.div>
+        </Button>
+      </motion.div>
+    </motion.div>
+  </motion.div>
+);
 
 const JourneySection = () => {
   const phases = [
@@ -185,7 +500,7 @@ const JourneySection = () => {
           desc: "Connect with peers and join study groups",
         },
         {
-          icon: "🎯",
+          icon: "��",
           title: "Progress Tracking",
           desc: "Monitor your learning progress and achievements",
         },
@@ -267,7 +582,6 @@ const JourneySection = () => {
         },
       ],
       image:
-      
         "https://images.unsplash.com/photo-1525921429624-479b6a26d84d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       stats: [
         { value: "07", label: "Final Step" },
@@ -276,11 +590,10 @@ const JourneySection = () => {
       order: "order-2 lg:order-1",
       imageOrder: "order-1 lg:order-2",
     },
-    
   ];
 
   return (
-    <AnimatedSection className="py-24 bg-white relative overflow-hidden">
+    <AnimatedSection className="overflow-hidden relative py-16 bg-white">
       {/* Background Pattern */}
       <motion.div
         className="absolute inset-0 opacity-5"
@@ -297,31 +610,16 @@ const JourneySection = () => {
         />
       </motion.div>
 
-      <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4 relative z-10">
+      <div className="container relative z-10 px-4 mx-auto sm:max-w-6xl md:max-w-7xl">
         <motion.div
-          className="text-center mb-20"
+          className="mb-20 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <motion.div
-            className="inline-flex items-center px-4 py-2 bg-emerald-50 rounded-full text-emerald-700 text-sm font-medium mb-6"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <motion.div
-              className="w-2 h-2 bg-emerald-500 rounded-full mr-2"
-              animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            />
-            Your Learning Path
-          </motion.div>
-
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 mb-6 leading-tight"
+            className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-5xl text-slate-800"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -329,7 +627,7 @@ const JourneySection = () => {
           >
             Your{" "}
             <motion.span
-              className="bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-600 bg-clip-text text-transparent"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-600"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -340,7 +638,7 @@ const JourneySection = () => {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
+            className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -352,329 +650,17 @@ const JourneySection = () => {
           </motion.p>
         </motion.div>
 
-        <div className="relative max-w-7xl mx-auto">
-          <div className="space-y-32 lg:space-y-40">
+        <div className="relative mx-auto max-w-7xl">
+          <div className="space-y-32 lg:space-y-10">
             {phases.map((phase, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                  <div className={`lg:pr-16 ${phase.order}`}>
-                    <div className="relative">
-                      <motion.div
-                        className="absolute -inset-4 rounded-3xl opacity-50 blur-xl"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, #ecfdf5, #d1fae5)",
-                        }}
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{
-                          duration: 4,
-                          repeat: Number.POSITIVE_INFINITY,
-                        }}
-                      />
-                      <motion.div
-                        whileHover={{ y: -5, scale: 1.02 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <Card
-                          className="py-0 relative bg-white border-0 rounded-3xl overflow-hidden transition-all duration-500 group"
-                          style={{
-                            boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
-                          }}
-                        >
-                          <CardContent className="p-0">
-                            {/* Card Header */}
-                            <div
-                              className="p-8 text-white relative overflow-hidden"
-                              style={{
-                                background: phase.gradient,
-                              }}
-                            >
-                              <motion.div
-                                className="absolute top-0 right-0 w-32 h-32 rounded-full -mr-16 -mt-16"
-                                style={{
-                                  background: "rgba(255, 255, 255, 0.1)",
-                                }}
-                                animate={{ rotate: 360 }}
-                                transition={{
-                                  duration: 20,
-                                  repeat: Number.POSITIVE_INFINITY,
-                                  ease: "linear",
-                                }}
-                              />
-                              <motion.div
-                                className="absolute bottom-0 left-0 w-24 h-24 rounded-full -ml-12 -mb-12"
-                                style={{
-                                  background: "rgba(255, 255, 255, 0.1)",
-                                }}
-                                animate={{ rotate: -360 }}
-                                transition={{
-                                  duration: 15,
-                                  repeat: Number.POSITIVE_INFINITY,
-                                  ease: "linear",
-                                }}
-                              />
-
-                              <div className="relative z-10">
-                                <div className="flex items-center mb-4">
-                                  <motion.div
-                                    className="w-16 h-16 rounded-2xl flex items-center justify-center mr-6"
-                                    style={{
-                                      background: "rgba(255, 255, 255, 0.2)",
-                                      backdropFilter: "blur(10px)",
-                                    }}
-                                    whileHover={{ scale: 1.1, rotate: 5 }}
-                                    transition={{
-                                      type: "spring",
-                                      stiffness: 300,
-                                    }}
-                                  >
-                                    <span className="text-2xl font-bold text-white">
-                                      {phase.phase}
-                                    </span>
-                                  </motion.div>
-                                  <div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold mb-1">
-                                      {phase.title}
-                                    </h3>
-                                    <p className="text-white/80 text-lg">
-                                      {phase.subtitle}
-                                    </p>
-                                  </div>
-                                </div>
-
-                                <p className="text-white/90 text-lg leading-relaxed">
-                                  {phase.description}
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Card Body */}
-                            <div className="p-8">
-                              <div className="grid grid-cols-1 gap-0">
-                                {phase.items.map((item, idx) => (
-                                  <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                      delay: idx * 0.1,
-                                      duration: 0.5,
-                                    }}
-                                    viewport={{ once: true }}
-                                    className="flex items-start space-x-4 p-4 rounded-xl hover:bg-emerald-50 transition-colors duration-300 group/item"
-                                    whileHover={{ x: 5 }}
-                                  >
-                                    <motion.div
-                                      className="text-2xl"
-                                      whileHover={{ scale: 1.2, rotate: 10 }}
-                                      transition={{
-                                        type: "spring",
-                                        stiffness: 300,
-                                      }}
-                                    >
-                                      {item.icon}
-                                    </motion.div>
-                                    <div className="flex-1">
-                                      <h4 className="font-semibold text-slate-800 mb-1 group-hover/item:text-emerald-600 transition-colors">
-                                        {item.title}
-                                      </h4>
-                                      <p className="text-slate-600 text-sm leading-relaxed">
-                                        {item.desc}
-                                      </p>
-                                    </div>
-                                    <motion.div
-                                      initial={{ opacity: 0, scale: 0.8 }}
-                                      whileHover={{ opacity: 1, scale: 1 }}
-                                      transition={{ duration: 0.3 }}
-                                    >
-                                      <CheckCircle className="w-5 h-5 text-emerald-500" />
-                                    </motion.div>
-                                  </motion.div>
-                                ))}
-                              </div>
-
-                              <div className="mt-8 pt-6 border-t border-slate-100">
-                                <div className="flex items-center justify-between text-sm text-slate-500">
-                                  <span className="flex items-center">
-                                    <motion.div
-                                      className="w-2 h-2 bg-emerald-500 rounded-full mr-2"
-                                      animate={{ scale: [1, 1.2, 1] }}
-                                      transition={{
-                                        duration: 2,
-                                        repeat: Number.POSITIVE_INFINITY,
-                                      }}
-                                    />
-                                    Step {phase.phase}
-                                  </span>
-                                  <span className="flex items-center">
-                                    <motion.div
-                                      className="w-2 h-2 bg-blue-500 rounded-full mr-2"
-                                      animate={{ scale: [1, 1.2, 1] }}
-                                      transition={{
-                                        duration: 2,
-                                        repeat: Number.POSITIVE_INFINITY,
-                                        delay: 0.5,
-                                      }}
-                                    />
-                                    {phase.subtitle}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    </div>
-                  </div>
-
-                  <div className={`${phase.imageOrder} lg:pl-16`}>
-                    <div className="relative group">
-                      <motion.div
-                        className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, #34d399, #3b82f6)",
-                        }}
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{
-                          duration: 4,
-                          repeat: Number.POSITIVE_INFINITY,
-                        }}
-                      />
-                      <motion.div
-                        className="relative overflow-hidden rounded-3xl shadow-2xl"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <motion.img
-                          src={phase.image}
-                          alt={`${phase.title} process`}
-                          className="w-full h-80 lg:h-96 object-cover"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.7 }}
-                        />
-                        <div
-                          className="absolute inset-0"
-                          style={{
-                            background:
-                              "linear-gradient(to top, rgba(0,0,0,0.4), transparent)",
-                          }}
-                        />
-
-                        {/* Floating Stats */}
-                        {phase.stats.map((stat, statIndex) => (
-                          <motion.div
-                            key={statIndex}
-                            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                            transition={{
-                              delay: 0.5 + statIndex * 0.2,
-                              duration: 0.6,
-                            }}
-                            viewport={{ once: true }}
-                            className={`absolute p-4 rounded-2xl shadow-lg ${
-                              statIndex === 0
-                                ? "top-6 right-6"
-                                : "bottom-6 left-6"
-                            }`}
-                            style={{
-                              background: "rgba(255, 255, 255, 0.95)",
-                              backdropFilter: "blur(10px)",
-                            }}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                          >
-                            <div className="text-center">
-                              <div className="text-2xl font-bold text-emerald-600">
-                                {stat.value}
-                              </div>
-                              <div className="text-xs text-slate-600 font-medium">
-                                {stat.label}
-                              </div>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </motion.div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+              <PhaseCard key={index} phase={phase} index={index}>
+                <CardHeader phase={phase} />
+                <CardBody phase={phase} />
+              </PhaseCard>
             ))}
           </div>
 
-          {/* Bottom CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-center mt-20"
-          >
-            <motion.div
-              className="inline-flex items-center space-x-4 p-8 rounded-3xl border border-emerald-100"
-              style={{
-                background: "linear-gradient(135deg, #ecfdf5, #dbeafe)",
-              }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="w-12 h-12 rounded-full border-4 border-white flex items-center justify-center text-white font-bold text-sm"
-                    style={{
-                      background: `linear-gradient(135deg, ${
-                        i <= 3 ? "#f97316" : i <= 5 ? "#ec4899" : "#10b981"
-                      }, ${i <= 3 ? "#ea580c" : i <= 5 ? "#be185d" : "#059669"})`,
-                    }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {i}
-                  </motion.div>
-                ))}
-              </div>
-              <div className="text-left">
-                <h4 className="text-xl font-bold text-slate-800 mb-1">
-                  Ready to Begin Your Journey?
-                </h4>
-                <p className="text-slate-600">
-                  Join 15,000+ professionals who transformed their careers
-                </p>
-              </div>
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Button
-                  className="text-white px-8 py-4 rounded-2xl font-semibold shadow-lg"
-                  style={{
-                    background: "linear-gradient(135deg, #059669, #3b82f6)",
-                    boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
-                  }}
-                >
-                  Start Application
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Number.POSITIVE_INFINITY,
-                    }}
-                  >
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </motion.div>
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+          <BottomCTA />
         </div>
       </div>
     </AnimatedSection>

@@ -53,7 +53,7 @@ const HeroSection = () => {
               </motion.div> */}
 
               <motion.h1
-                className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl"
+                className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl text-center sm:text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -102,7 +102,7 @@ const HeroSection = () => {
                   {/*  */}
                   <div>
                     <motion.h3
-                      className="mb-2 font-bold text-emerald-700 sm:text-2xl"
+                      className="mb-2 font-bold text-emerald-700 sm:text-2xl text-center sm:text-left text"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 1, duration: 0.5 }}
@@ -110,7 +110,7 @@ const HeroSection = () => {
                       🎓 ADMISSIONS OPEN 2025 - Limited Seats!
                     </motion.h3>
                     <motion.p
-                      className="text-base leading-relaxed text-emerald-600"
+                      className="text-base leading-relaxed text-emerald-600 text-center sm:text-left"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 1.2, duration: 0.5 }}

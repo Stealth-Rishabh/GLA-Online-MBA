@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight } from "lucide-react";
@@ -31,6 +31,135 @@ const animations = {
   },
 };
 
+// Mobile Slider Component
+const MobileSlider = ({ phases }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const autoPlayRef = useRef(null);
+  const sliderRef = useRef(null);
+  const touchStartTime = useRef(0);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % phases.length);
+  }, [phases.length]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + phases.length) % phases.length);
+  }, [phases.length]);
+
+  const goToSlide = useCallback((index) => {
+    setCurrentIndex(index);
+  }, []);
+
+  // Auto-play functionality with performance optimization
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        nextSlide();
+      }, 3000);
+    } else {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    }
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
+  }, [isAutoPlaying, nextSlide]);
+
+  // Optimized touch handlers with better performance
+  const onTouchStart = useCallback((e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+    touchStartTime.current = Date.now();
+    setIsAutoPlaying(false);
+  }, []);
+
+  const onTouchMove = useCallback((e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  }, []);
+
+  const onTouchEnd = useCallback(() => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const swipeTime = Date.now() - touchStartTime.current;
+    const isQuickSwipe = swipeTime < 300 && Math.abs(distance) > 100;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isQuickSwipe || isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+
+    // Resume auto-play after 2 seconds
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 2000);
+  }, [touchStart, touchEnd, minSwipeDistance, nextSlide, prevSlide]);
+
+  return (
+    <div className="relative w-full h-fit">
+      {/* Slider Container with hardware acceleration */}
+      <div
+        ref={sliderRef}
+        className="flex transition-transform duration-300 ease-out will-change-transform"
+        style={{
+          transform: `translateX(-${currentIndex * 100}%)`,
+          backfaceVisibility: "hidden",
+          perspective: "1000px",
+        }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        {phases.map((phase, index) => (
+          <div key={index} className="w-full flex-shrink-0">
+            <MobilePhaseCard phase={phase} index={index}>
+              <CardHeader phase={phase} />
+              <CardBody phase={phase} />
+            </MobilePhaseCard>
+          </div>
+        ))}
+      </div>
+
+      {/* Optimized Animated Dots */}
+      <div className="flex justify-center items-center mt-8 space-x-2">
+        {phases.map((_, index) => (
+          <motion.button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? "bg-emerald-500 scale-125"
+                : "bg-slate-300 hover:bg-slate-400"
+            }`}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            animate={{
+              scale: index === currentIndex ? [1, 1.2, 1] : 1,
+            }}
+            transition={{
+              duration: 2,
+              repeat: index === currentIndex ? Number.POSITIVE_INFINITY : 0,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 // Reusable components
 const PhaseCard = ({ phase, index, children }) => (
   <motion.div
@@ -40,7 +169,7 @@ const PhaseCard = ({ phase, index, children }) => (
     className="relative"
   >
     <div className="grid gap-12 items-center lg:grid-cols-2">
-      <div className={` ${phase.order}`}>
+      <div className={` ${phase.order} `}>
         <div className="relative">
           <motion.div
             className="absolute -inset-4 rounded-3xl opacity-50 blur-xl"
@@ -69,7 +198,7 @@ const PhaseCard = ({ phase, index, children }) => (
         </div>
       </div>
 
-      <div className={`${phase.imageOrder} `}>
+      <div className={`${phase.imageOrder} hidden sm:block `}>
         <div className="relative group">
           <motion.div
             className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl"
@@ -134,103 +263,144 @@ const PhaseCard = ({ phase, index, children }) => (
   </motion.div>
 );
 
-const CardHeader = ({ phase }) => (
+// Mobile-specific PhaseCard component with performance optimizations
+const MobilePhaseCard = React.memo(({ phase, index, children }) => (
+  <motion.div
+    key={index}
+    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.4, ease: "easeOut" }}
+    viewport={{ once: true }}
+    className="relative w-[95%] mx-auto"
+  >
+    <div className="relative">
+      <motion.div
+        className="absolute -inset-4 rounded-3xl opacity-30 blur-xl"
+        style={{
+          background: "linear-gradient(135deg, #ecfdf5, #d1fae5)",
+        }}
+        animate={{ scale: [1, 1.02, 1] }}
+        transition={{
+          duration: 3,
+          repeat: Number.POSITIVE_INFINITY,
+        }}
+      />
+      <motion.div
+        whileHover={{ y: -2, scale: 1.01 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+      >
+        <Card
+          className="overflow-hidden relative py-0 bg-white rounded-3xl border-0 transition-all duration-300 group w-full"
+          style={{
+            boxShadow: "0 15px 35px rgba(0, 0, 0, 0.1)",
+            willChange: "transform",
+          }}
+        >
+          <CardContent className="p-0">{children}</CardContent>
+        </Card>
+      </motion.div>
+    </div>
+  </motion.div>
+));
+
+const CardHeader = React.memo(({ phase }) => (
   <div
-    className="overflow-hidden relative p-8 text-white"
+    className="overflow-hidden relative p-6 text-white"
     style={{ background: phase.gradient }}
   >
     <motion.div
-      className="absolute top-0 right-0 -mt-16 -mr-16 w-32 h-32 rounded-full"
+      className="absolute top-0 right-0 -mt-12 -mr-12 w-24 h-24 rounded-full"
       style={{ background: "rgba(255, 255, 255, 0.1)" }}
       animate={{ rotate: 360 }}
-      transition={{
-        duration: 20,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "linear",
-      }}
-    />
-    <motion.div
-      className="absolute bottom-0 left-0 -mb-12 -ml-12 w-24 h-24 rounded-full"
-      style={{ background: "rgba(255, 255, 255, 0.1)" }}
-      animate={{ rotate: -360 }}
       transition={{
         duration: 15,
         repeat: Number.POSITIVE_INFINITY,
         ease: "linear",
       }}
     />
+    <motion.div
+      className="absolute bottom-0 left-0 -mb-8 -ml-8 w-16 h-16 rounded-full"
+      style={{ background: "rgba(255, 255, 255, 0.1)" }}
+      animate={{ rotate: -360 }}
+      transition={{
+        duration: 12,
+        repeat: Number.POSITIVE_INFINITY,
+        ease: "linear",
+      }}
+    />
 
     <div className="relative z-10">
-      <div className="flex items-center mb-4">
+      <div className="flex items-center mb-3">
         <motion.div
-          className="flex justify-center items-center mr-6 w-16 h-16 rounded-2xl"
+          className="flex justify-center items-center mr-4 w-12 h-12 rounded-xl"
           style={{
             background: "rgba(255, 255, 255, 0.2)",
             backdropFilter: "blur(10px)",
           }}
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          transition={{ type: "spring", stiffness: 300 }}
+          whileHover={{ scale: 1.05, rotate: 3 }}
+          transition={{ type: "spring", stiffness: 400 }}
         >
-          <span className="text-2xl font-bold text-white">{phase.phase}</span>
+          <span className="text-xl font-bold text-white">{phase.phase}</span>
         </motion.div>
         <div>
-          <h3 className="mb-1 text-2xl font-bold lg:text-3xl">{phase.title}</h3>
-          <p className="text-lg text-white/80">{phase.subtitle}</p>
+          <h3 className="mb-1 text-xl font-bold lg:text-2xl">{phase.title}</h3>
+          <p className="text-base text-white/80">{phase.subtitle}</p>
         </div>
       </div>
 
-      <p className="text-lg leading-relaxed text-white/90">
+      <p className="text-base leading-relaxed text-white/90">
         {phase.description}
       </p>
     </div>
   </div>
-);
+));
 
-const CardBody = ({ phase }) => (
-  <div className="p-5">
+const CardBody = React.memo(({ phase }) => (
+  <div className="p-4">
     <div className="grid grid-cols-1 gap-0">
       {phase.items.map((item, idx) => (
         <motion.div
           key={idx}
-          {...animations.item}
-          viewport={{ once: true }}
-          className="flex items-start p-4 space-x-4 rounded-xl transition-colors duration-300 hover:bg-emerald-50 group/item"
-          whileHover={{ x: 5 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: idx * 0.1, duration: 0.3 }}
+          className="flex items-start p-3 space-x-3 rounded-lg transition-colors duration-200 hover:bg-emerald-50 group/item"
+          whileHover={{ x: 3 }}
         >
           <motion.div
-            className="text-2xl"
-            whileHover={{ scale: 1.2, rotate: 10 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            className="text-xl"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 400 }}
           >
             {item.icon}
           </motion.div>
           <div className="flex-1">
-            <h4 className="mb-1 font-semibold transition-colors text-slate-800 group-hover/item:text-emerald-600">
+            <h4 className="mb-1 text-sm font-semibold transition-colors text-slate-800 group-hover/item:text-emerald-600">
               {item.title}
             </h4>
-            <p className="text-sm leading-relaxed text-slate-600">
+            <p className="text-xs leading-relaxed text-slate-600">
               {item.desc}
             </p>
           </div>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileHover={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
-            <CheckCircle className="w-5 h-5 text-emerald-500" />
+            <CheckCircle className="w-4 h-4 text-emerald-500" />
           </motion.div>
         </motion.div>
       ))}
     </div>
 
-    <div className="pt-6 mt- border-t border-slate-100">
-      <div className="flex justify-between items-center text-sm text-slate-500">
+    <div className="pt-4 mt-4 border-t border-slate-100">
+      <div className="flex justify-between items-center text-xs text-slate-500">
         <span className="flex items-center">
           <motion.div
-            className="mr-2 w-2 h-2 bg-emerald-500 rounded-full"
+            className="mr-2 w-1.5 h-1.5 bg-emerald-500 rounded-full"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{
-              duration: 2,
+              duration: 1.5,
               repeat: Number.POSITIVE_INFINITY,
             }}
           />
@@ -238,12 +408,12 @@ const CardBody = ({ phase }) => (
         </span>
         <span className="flex items-center">
           <motion.div
-            className="mr-2 w-2 h-2 bg-blue-500 rounded-full"
+            className="mr-2 w-1.5 h-1.5 bg-blue-500 rounded-full"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{
-              duration: 2,
+              duration: 1.5,
               repeat: Number.POSITIVE_INFINITY,
-              delay: 0.5,
+              delay: 0.3,
             }}
           />
           {phase.subtitle}
@@ -251,7 +421,7 @@ const CardBody = ({ phase }) => (
       </div>
     </div>
   </div>
-);
+));
 
 const BottomCTA = () => (
   <motion.div
@@ -479,7 +649,7 @@ const JourneySection = () => {
     {
       phase: "05",
       title: "Access Phase",
-      subtitle: "Gain access to Learning Management System",
+      subtitle: "Gain access to our LMS",
       description:
         "Get complete access to our advanced Learning Management System with all course materials and resources.",
       gradient: "linear-gradient(135deg, #06b6d4, #0891b2)",
@@ -500,7 +670,7 @@ const JourneySection = () => {
           desc: "Connect with peers and join study groups",
         },
         {
-          icon: "��",
+          icon: "📊",
           title: "Progress Tracking",
           desc: "Monitor your learning progress and achievements",
         },
@@ -651,13 +821,21 @@ const JourneySection = () => {
         </motion.div>
 
         <div className="relative mx-auto max-w-7xl">
-          <div className="space-y-32 lg:space-y-10">
-            {phases.map((phase, index) => (
-              <PhaseCard key={index} phase={phase} index={index}>
-                <CardHeader phase={phase} />
-                <CardBody phase={phase} />
-              </PhaseCard>
-            ))}
+          {/* Mobile Slider - Only visible on mobile */}
+          <div className="block sm:hidden h-fit">
+            <MobileSlider phases={phases} />
+          </div>
+
+          {/* Desktop Layout - Only visible on desktop */}
+          <div className="hidden sm:block">
+            <div className="space-y-10 lg:space-y-10">
+              {phases.map((phase, index) => (
+                <PhaseCard key={index} phase={phase} index={index}>
+                  <CardHeader phase={phase} />
+                  <CardBody phase={phase} />
+                </PhaseCard>
+              ))}
+            </div>
           </div>
 
           <BottomCTA />

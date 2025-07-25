@@ -8,29 +8,44 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 const RecruitersSection = () => {
   const recruiters = [
     {
-      name: "Infosys",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg",
-    },
-
-    {
-      name: "Accenture",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg",
+      name: "Jindal",
+      logo: "/images/logos/logo6.png",
     },
     {
-      name: "IBM",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+      name: "Tech Mahindra",
+      logo: "/images/logos/logo9.png",
     },
     {
-      name: "Microsoft",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg",
+      name: "Honda",
+      logo: "/images/logos/logo3.png",
+    },
+    {
+      name: "HDFC Bank",
+      logo: "/images/logos/logo4.png",
+    },
+    {
+      name: "NTT Data",
+      logo: "/images/logos/logo5.png",
     },
     {
       name: "Amazon",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+      logo: "/images/logos/logo1.png",
     },
     {
-      name: "Google",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+      name: "Afcons",
+      logo: "/images/logos/logo7.png",
+    },
+    {
+      name: "Mu Sigma",
+      logo: "/images/logos/logo8.png",
+    },
+    {
+      name: "Samsung",
+      logo: "/images/logos/logo2.png",
+    },
+    {
+      name: "Azure Power",
+      logo: "/images/logos/logo10.png",
     },
   ];
 
@@ -74,7 +89,7 @@ const RecruitersSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center">
           {recruiters.map((recruiter, index) => (
             <motion.div
               key={index}
@@ -86,7 +101,7 @@ const RecruitersSection = () => {
               className="group"
             >
               <motion.div
-                className="bg-white p-6 rounded-xl border border-slate-100 transition-all duration-300"
+                className="bg-white p-6 rounded-xl  transition-all duration-300"
                 style={{
                   boxShadow: "0 5px 15px rgba(0, 0, 0, 0.08)",
                   "&:hover": {
@@ -97,7 +112,7 @@ const RecruitersSection = () => {
                 <motion.img
                   src={recruiter.logo || "/placeholder.svg"}
                   alt={recruiter.name}
-                  className="w-full h-16 object-contain transition-all duration-300"
+                  className="w-full h-16 object-contain grayscale transition-all duration-300"
                   style={{ filter: "grayscale(0%)" }}
                   whileHover={{ filter: "grayscale(0%)" }}
                 />
@@ -116,20 +131,20 @@ const RecruitersSection = () => {
           {stats.map((item, index) => (
             <motion.div
               key={index}
-              className="text-center"
+              className="text-center bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-50  p-8 rounded-xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
             >
               <motion.div
-                className={`w-16 h-16 bg-gradient-to-br from-${item.color}-100 to-${item.color}-200 rounded-2xl flex items-center justify-center mx-auto mb-4`}
+                className={`w-16 h-16 bg-gradient-to-br from-${item.color}-100 to-${item.color}-200 rounded-2xl flex items-center justify-center mx-auto mb-4 `}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <item.icon className={`w-8 h-8 text-${item.color}-600`} />
               </motion.div>
-              <h4 className="text-xl font-bold text-slate-800 mb-2">
+              <h4 className="text-3xl font-bold text-emerald-900 mb-2">
                 {item.title}
               </h4>
               <p className="text-slate-600">{item.desc}</p>

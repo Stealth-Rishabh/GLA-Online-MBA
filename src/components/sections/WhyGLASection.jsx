@@ -42,7 +42,7 @@ const WhyGLASection = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-              Why Choose <span className="text-emerald-600">GLA Online?</span>
+              About <span className="text-emerald-600">GLA Online MBA</span>
             </h2>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed">
               Experience world-class education designed for the modern

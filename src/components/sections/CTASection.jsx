@@ -10,7 +10,7 @@ const CTASection = () => {
   const stats = [
     { value: "24 Months", label: "Program Duration" },
     { value: "100%", label: "Online Learning" },
-    { value: "EMI", label: "Payment Options" },
+    { value: "No Cost EMI", label: "Payment Options" },
   ];
 
   return (
@@ -51,13 +51,13 @@ const CTASection = () => {
           >
             <Button
               size="lg"
-              className="text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg"
+              className="text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg cursor-pointer"
               style={{
                 background: "linear-gradient(135deg, #059669, #10b981)",
                 boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
               }}
             >
-              Apply Now - Limited Seats
+              Enquire Now - Limited Seats
               <motion.div
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
@@ -67,25 +67,7 @@ const CTASection = () => {
             </Button>
           </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-slate-900 px-8 py-4 text-lg font-semibold rounded-xl bg-transparent"
-            >
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-              >
-                <Phone className="mr-2 w-5 h-5" />
-              </motion.div>
-              Call: 1800-XXX-XXXX
-            </Button>
-          </motion.div>
+          
         </motion.div>
 
         <motion.div

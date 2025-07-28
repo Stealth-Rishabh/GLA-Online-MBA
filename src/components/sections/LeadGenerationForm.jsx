@@ -252,10 +252,10 @@ const LeadGenerationForm = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <h3 className="mb-2 text-2xl font-bold text-slate-800">
-                Begin Your Transformation
+              <h3 className="mb-2 text-2xl sm:text-2xl font-bold text-emerald-800 tracking-wide">
+                Enquire Now
               </h3>
-              <p className="text-emerald-700">
+              <p className="text-emerald-700 hidden sm:block">
                 Get personalized program details instantly
               </p>
             </motion.div>
@@ -422,7 +422,7 @@ const LeadGenerationForm = () => {
                         exit={{ opacity: 0 }}
                         className="flex justify-center items-center"
                       >
-                        Get Program Details
+                        Submit Now
                         <motion.div
                           animate={{ x: [0, 5, 0] }}
                           transition={{

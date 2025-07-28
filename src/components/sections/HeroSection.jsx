@@ -1,24 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { motion,  } from "framer-motion";
 
-import { Card, CardContent } from "@/components/ui/card";
-
-import { ArrowRight } from "lucide-react";
-import { submitAdmissionQuery } from "@/lib/crm";
-import { toast } from "sonner";
-import { getAllStates, getCitiesForState } from "@/lib/stateData";
 import LeadGenerationForm from "./LeadGenerationForm";
 
 const HeroSection = () => {
@@ -34,7 +17,7 @@ const HeroSection = () => {
         animate={{ scale: 1 }}
         transition={{ duration: 10, ease: "easeOut" }}
       />
-      <div className="container relative z-10 px-4 py-12 mx-auto sm:max-w-6xl md:max-w-7xl lg:py-10 sm:py-20">
+      <div className="container relative z-10 px-4 py-8 mx-auto sm:max-w-6xl md:max-w-7xl lg:py-10 sm:py-20">
         <div className="grid gap-0 sm:gap-12 items-center lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -54,7 +37,7 @@ const HeroSection = () => {
               </motion.div> */}
 
               <motion.h1
-                className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl text-center sm:text-left"
+                className="text-4xl font-bold leading-normal md:text-5xl lg:text-6xl text-center sm:text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -70,15 +53,27 @@ const HeroSection = () => {
                   Anytime, Anywhere
                 </motion.span>
                 <br />
-                <span className="text-slate-200">with Our</span>
+                <span className="text-slate-200">with</span>
 
                 <motion.span
-                  className="ml-3 text-emerald-400"
+                  className="-mb-4 sm:-mb-6  ml-2 inline-block text-white bg-emerald-600 font-bold border rounded border-emerald-400 bg-white-20 px-4 relative overflow-hidden"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.7, duration: 0.6 }}
                 >
-                  Online MBA
+                  <span className="relative z-10">Online</span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "100%" }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      repeatDelay: 1
+                    }}
+                  />
+                  <span className="ml-1 relative z-10">MBA</span>
                 </motion.span>
               </motion.h1>
               {/* 
@@ -94,7 +89,7 @@ const HeroSection = () => {
               </motion.p> */}
 
               <motion.div
-                className="p-5 w-full max-w-2xl bg-gradient-to-r from-emerald-100 to-green-50 rounded-xl border border-l-4 border-emerald-200 border-l-emerald-500"
+                className="hidden sm:block p-5 w-full max-w-2xl bg-gradient-to-r from-emerald-100 to-green-50 rounded-xl border border-l-4 border-emerald-200 border-l-emerald-500"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
@@ -111,7 +106,7 @@ const HeroSection = () => {
                       🎓 ADMISSIONS OPEN 2025 - Limited Seats!
                     </motion.h3>
                     <motion.p
-                      className="text-base leading-relaxed text-emerald-600 text-center sm:text-left"
+                      className="text-base leading-relaxed text-emerald-600 text-center sm:text-left hidden sm:block"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 1.2, duration: 0.5 }}
@@ -119,6 +114,27 @@ const HeroSection = () => {
                       Premium MBA education with flexible learning for ambitious
                       professionals.
                     </motion.p>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                className="block sm:hidden p-5 w-full max-w-2xl bg-gradient-to-r from-emerald-100 to-green-50 rounded-xl border border-l-4 border-emerald-200 border-l-emerald-500"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+              >
+                <div className="flex gap-3 items-start animate-pulse">
+                  {/*  */}
+                  <div>
+                    <motion.h3
+                      className="font-bold text-emerald-700 font-serif text-3xl text-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1, duration: 0.5 }}
+                    >
+                      ADMISSIONS OPEN 2025
+                    </motion.h3>
+                   
                   </div>
                 </div>
               </motion.div>
@@ -187,9 +203,9 @@ const HeroSection = () => {
               transition={{ delay: 1.2, duration: 0.6 }}
             >
               {[
-                { value: "15K", label: "Alumni Network", suffix: "+" },
-                { value: 98, label: "Placement Rate", suffix: "%" },
-                { value: 4.8, label: "Student Rating", suffix: "" },
+                { value: "NAAC 'A+'", label: "Accredited University", suffix: "" },
+                { value: "₹1,05,000", label: "(All Inclusive)", suffix: "" },
+                { value: "24", label: "Months", suffix: "" },
               ].map((stat, index) => (
                 <div
                   key={index}

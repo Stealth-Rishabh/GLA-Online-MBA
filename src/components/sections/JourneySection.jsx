@@ -461,7 +461,7 @@ const BottomCTA = () => (
           Ready to Begin Your Journey?
         </h4>
         <p className="text-slate-600">
-          Join 15,000+ professionals who transformed their careers
+          Join 36,000+ professionals who transformed their careers
         </p>
       </div>
       <motion.div
@@ -476,7 +476,7 @@ const BottomCTA = () => (
             boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
           }}
         >
-          Start Application
+          Enquire Now
           <motion.div
             animate={{ x: [0, 5, 0] }}
             transition={{
@@ -591,7 +591,7 @@ const JourneySection = () => {
         {
           icon: "📊",
           title: "Installment Plans",
-          desc: "Flexible EMI options available for easy payments",
+          desc: "Flexible No Cost EMI options available for easy payments",
         },
         {
           icon: "🧾",
@@ -763,7 +763,7 @@ const JourneySection = () => {
   ];
 
   return (
-    <AnimatedSection className="overflow-hidden relative py-16 bg-white">
+    <AnimatedSection className="overflow-hidden relative py-8 sm:py-16 bg-white">
       {/* Background Pattern */}
       <motion.div
         className="absolute inset-0 opacity-5"

@@ -5,6 +5,34 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Trophy, Shield, Globe } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { Marquee } from "@/components/magicui/marquee";
+
+// Reusable Logo Card Component
+const LogoCard = ({ logo, index }) => {
+  return (
+    <motion.div
+      key={index}
+      className="flex items-center justify-center mx-8"
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <div className="relative group">
+        <div className=" h-16 bg-white rounded-lg  flex items-center justify-center hover:border-emerald-300 transition-all duration-300 hover:shadow-xl">
+          <img
+            src={logo.image}
+            alt={logo.name}
+            className="max-w-full max-h-full object-contain  transition-all duration-300"
+          />
+        </div>
+        <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span className="text-xs font-medium text-slate-600 bg-white px-2 py-1 rounded shadow-sm">
+            {logo.name}
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const RankingSection = () => {
   const rankingData = [
@@ -54,6 +82,21 @@ const RankingSection = () => {
     },
   ];
 
+  // Ranking logos data
+  const rankingLogos = [
+    { name: "NAAC", image: "/images/ranking/c-naac.jpg" },
+    { name: "NIRF", image: "/images/ranking/c-nirf.jpg" },
+    { name: "UGC", image: "/images/ranking/c-ugc.jpg" },
+    { name: "ACCA", image: "/images/ranking/c-acca.jpg" },
+    { name: "AIU", image: "/images/ranking/c-aiu.jpg" },
+    { name: "IACB", image: "/images/ranking/c-iacb.jpg" },
+    { name: "IAU", image: "/images/ranking/c-iau.jpg" },
+    { name: "Times", image: "/images/ranking/c-times.jpg" },
+    { name: "WES", image: "/images/ranking/c-wes.jpg" },
+  ];
+
+  const firstRowLogos = rankingLogos.slice(0, rankingLogos.length / 2);
+  const secondRowLogos = rankingLogos.slice(rankingLogos.length / 2);
   return (
     <AnimatedSection className="py-10 sm:py-20 bg-white">
       <div className="container sm:max-w-6xl md:max-w-7xl mx-auto px-4">
@@ -73,7 +116,7 @@ const RankingSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {rankingData.map((item, index) => (
             <motion.div
               key={index}
@@ -137,6 +180,43 @@ const RankingSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Ranking Logos Marquee Section */}
+        <motion.div
+          className="mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          {/* <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-slate-800 mb-2">
+              Recognized by Leading Bodies
+            </h3>
+            <p className="text-slate-600">
+              Our accreditations and rankings speak for our quality
+            </p>
+          </div> */}
+
+          {/* First Row - Forward Direction (Left to Right) */}
+          <div className="mb-8">
+            <Marquee className="sm:py-8 py-0" pauseOnHover={true}>
+              {firstRowLogos.map((logo, index) => (
+                <LogoCard key={index} logo={logo} index={index} />
+              ))}
+            </Marquee>
+          </div>
+
+          {/* Second Row - Reverse Direction (Right to Left) */}
+          <div>
+            <Marquee className="sm:py-8 py-0" reverse={true} pauseOnHover={true}>
+              {secondRowLogos.map((logo, index) => (
+                <LogoCard key={index} logo={logo} index={index} />
+              ))}
+            </Marquee>
+          </div>
+          
+        </motion.div>
       </div>
     </AnimatedSection>
   );

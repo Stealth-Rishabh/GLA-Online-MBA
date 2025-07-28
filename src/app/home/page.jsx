@@ -5,7 +5,7 @@ import Header from "@/components/sections/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import RankingSection from "@/components/sections/RankingSection";
 import ProgrammesSection from "@/components/sections/ProgrammesSection";
-import WhyGLASection from "@/components/sections/WhyGLASection";
+import AboutGLASection from "@/components/sections/AboutGLASection";
 import RecruitersSection from "@/components/sections/RecruitersSection";
 import JourneySection from "@/components/sections/JourneySection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -17,10 +17,10 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white overflow-x-hidden">
       <Header />
       <HeroSection />
-      <RankingSection />
+      <AboutGLASection />
       <ProgrammesSection />
-      <WhyGLASection />
       <RecruitersSection />
+      <RankingSection />
       <JourneySection />
       <TestimonialsSection />
       <CTASection />

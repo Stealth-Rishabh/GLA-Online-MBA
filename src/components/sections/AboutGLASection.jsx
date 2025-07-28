@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Zap, Users, Network, Lightbulb } from "lucide-react";
 
-const WhyGLASection = () => {
+const AboutGLASection = () => {
   const features = [
     {
       icon: Zap,
@@ -22,7 +22,7 @@ const WhyGLASection = () => {
     {
       icon: Network,
       title: "Strong Alumni Network",
-      desc: "Connect with 15,000+ alumni across various industries and leadership positions.",
+      desc: "Connect with 36,000+ alumni across various industries and leadership positions.",
     },
     {
       icon: Lightbulb,
@@ -97,7 +97,7 @@ const WhyGLASection = () => {
                     boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
                   }}
                 >
-                  Explore Benefits
+                  Enquire Now
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
                     transition={{
@@ -147,8 +147,8 @@ const WhyGLASection = () => {
               whileHover={{ scale: 1.05, y: -5 }}
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-emerald-600">98%</div>
-                <div className="text-sm text-slate-600">Placement Rate</div>
+                <div className="text-2xl font-bold text-emerald-600">No Cost EMI</div>
+                <div className="text-sm text-slate-600">Payment Options</div>
               </div>
             </motion.div>
 
@@ -161,8 +161,8 @@ const WhyGLASection = () => {
               whileHover={{ scale: 1.05, y: -5 }}
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-emerald-600">4.8/5</div>
-                <div className="text-sm text-slate-600">Student Rating</div>
+                <div className="text-2xl font-bold text-emerald-600">36K</div>
+                <div className="text-sm text-slate-600">Alumni Network</div>
               </div>
             </motion.div>
           </motion.div>
@@ -172,4 +172,4 @@ const WhyGLASection = () => {
   );
 };
 
-export default WhyGLASection;
+export default AboutGLASection;

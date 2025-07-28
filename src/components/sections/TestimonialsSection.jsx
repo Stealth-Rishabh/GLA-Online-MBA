@@ -14,8 +14,7 @@ const TestimonialsSection = () => {
       content:
         "Pursuing Online MBA program at GLA Online was one of the best decisions of my career. The interactive sessions and practical assignments enhanced my learning experience. GLA Online didn't just provide education but empowered me with the skills to excel. Highly recommended",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+      image: "/images/testimonials/shalini.png",
     },
     {
       name: "Anmol Nagpal",
@@ -23,8 +22,7 @@ const TestimonialsSection = () => {
       content:
         "Enrolling in the Online MBA program at GLA Online has been a transformative experience. I am thrilled to be part of the 2024‑26 batch, and I'm confident this program will be a cornerstone in my journey toward professional excellence.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      image: "/images/testimonials/anmol.png",
     },
     {
       name: "Mukul",
@@ -32,8 +30,7 @@ const TestimonialsSection = () => {
       content:
         "GLA Online's MBA program was a game‑changer for me! The support system, from doubt‑clearing to career guidance, was exceptional.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      image: "/images/testimonials/mukul.png",
     },
     {
       name: "Deeksha Agrawal",
@@ -41,8 +38,7 @@ const TestimonialsSection = () => {
       content:
         "The flexible learning environment, industry‑relevant curriculum, and exceptional faculty support made it possible for me to balance work and studies seamlessly. GLA Online truly empowered me with knowledge and confidence.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
+      image: "/images/testimonials/deeksha.png",
     },
     {
       name: "Ashwini Chaudhry",
@@ -50,8 +46,7 @@ const TestimonialsSection = () => {
       content:
         "Studying MBA online from GLA University has been an enriching experience! The practical insights, coupled with academic excellence, have not only enhanced my business acumen but also broadened my perspective.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
+      image: "/images/testimonials/ashwini.png",
     },
   ];
 
@@ -61,6 +56,10 @@ const TestimonialsSection = () => {
   const [isPaused, setIsPaused] = useState(false);
   const autoPlayRef = useRef(null);
   const containerRef = useRef(null);
+
+  // Desktop slider state
+  const [desktopCurrentIndex, setDesktopCurrentIndex] = useState(0);
+  const desktopContainerRef = useRef(null);
 
   // Navigation functions
   const nextSlide = useCallback(() => {
@@ -76,6 +75,29 @@ const TestimonialsSection = () => {
   const goToSlide = useCallback((index) => {
     setCurrentIndex(index);
   }, []);
+
+  // Desktop navigation functions
+  const nextDesktopSlide = useCallback(() => {
+    setDesktopCurrentIndex((prev) => {
+      const maxIndex = Math.max(0, testimonials.length - 2);
+      return prev >= maxIndex ? 0 : prev + 1;
+    });
+  }, [testimonials.length]);
+
+  const prevDesktopSlide = useCallback(() => {
+    setDesktopCurrentIndex((prev) => {
+      const maxIndex = Math.max(0, testimonials.length - 2);
+      return prev <= 0 ? maxIndex : prev - 1;
+    });
+  }, [testimonials.length]);
+
+  const goToDesktopSlide = useCallback(
+    (index) => {
+      const maxIndex = Math.max(0, testimonials.length - 2);
+      setDesktopCurrentIndex(Math.min(index, maxIndex));
+    },
+    [testimonials.length]
+  );
 
   // Auto-play functionality with pause on hover
   useEffect(() => {
@@ -163,80 +185,152 @@ const TestimonialsSection = () => {
           </p>
         </motion.div>
 
-        {/* Desktop Grid Layout */}
+        {/* Desktop Slider Layout */}
         <div className="hidden md:block">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                viewport={{ once: true }}
-              >
-                <Card
-                  className="py-0 h-full border-0 rounded-2xl bg-white transition-all duration-300"
-                  style={{
-                    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
-                  }}
+          <div
+            ref={desktopContainerRef}
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Slider Container */}
+            <div className="overflow-hidden p-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={desktopCurrentIndex}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="w-full"
                 >
-                  <CardContent className="p-8">
-                    <motion.div
-                      className="flex items-center mb-4"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2, duration: 0.5 }}
-                      viewport={{ once: true }}
-                    >
-                      {[...Array(testimonial.rating)].map((_, i) => (
+                  <div className="grid grid-cols-2 gap-8">
+                    {testimonials
+                      .slice(desktopCurrentIndex, desktopCurrentIndex + 2)
+                      .map((testimonial, index) => (
                         <motion.div
-                          key={i}
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: i * 0.1, duration: 0.3 }}
-                          viewport={{ once: true }}
+                          key={`${desktopCurrentIndex}-${index}`}
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.2, duration: 0.6 }}
+                          whileHover={{ y: -5, scale: 1.02 }}
                         >
-                          <Star className="w-5 h-5 text-amber-400 fill-current" />
+                          <Card
+                            className="py-0 h-full border-0 rounded-2xl bg-white transition-all duration-300"
+                            style={{
+                              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
+                            }}
+                          >
+                            <CardContent className="p-8">
+                              <motion.div
+                                className="flex items-center mb-4"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2, duration: 0.5 }}
+                              >
+                                {[...Array(testimonial.rating)].map((_, i) => (
+                                  <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, scale: 0.5 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{
+                                      delay: i * 0.1,
+                                      duration: 0.3,
+                                    }}
+                                  >
+                                    <Star className="w-5 h-5 text-amber-400 fill-current" />
+                                  </motion.div>
+                                ))}
+                              </motion.div>
+                              <motion.p
+                                className="text-slate-600 mb-6 leading-relaxed italic"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3, duration: 0.6 }}
+                              >
+                                "{testimonial.content}"
+                              </motion.p>
+                              <motion.div
+                                className="flex items-center"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.4, duration: 0.5 }}
+                              >
+                                <motion.img
+                                  src={testimonial.image || "/placeholder.svg"}
+                                  alt={testimonial.name}
+                                  className="w-12 h-12 rounded-full object-cover mr-4"
+                                  whileHover={{ scale: 1.1 }}
+                                  transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                  }}
+                                />
+                                <div>
+                                  <h4 className="font-semibold text-slate-800">
+                                    {testimonial.name}
+                                  </h4>
+                                  <p className="text-sm text-slate-600">
+                                    {testimonial.role}
+                                  </p>
+                                </div>
+                              </motion.div>
+                            </CardContent>
+                          </Card>
                         </motion.div>
                       ))}
-                    </motion.div>
-                    <motion.p
-                      className="text-slate-600 mb-6 leading-relaxed italic"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3, duration: 0.6 }}
-                      viewport={{ once: true }}
-                    >
-                      "{testimonial.content}"
-                    </motion.p>
-                    <motion.div
-                      className="flex items-center"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                      viewport={{ once: true }}
-                    >
-                      <motion.img
-                        src={testimonial.image || "/placeholder.svg"}
-                        alt={testimonial.name}
-                        className="w-12 h-12 rounded-full object-cover mr-4"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      />
-                      <div>
-                        <h4 className="font-semibold text-slate-800">
-                          {testimonial.name}
-                        </h4>
-                        <p className="text-sm text-slate-600">
-                          {testimonial.role}
-                        </p>
-                      </div>
-                    </motion.div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Desktop Navigation Arrows */}
+            <motion.button
+              onClick={prevDesktopSlide}
+              className="absolute -left-10 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronLeft className="w-6 h-6 text-slate-600" />
+            </motion.button>
+
+            <motion.button
+              onClick={nextDesktopSlide}
+              className="absolute -right-10 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronRight className="w-6 h-6 text-slate-600" />
+            </motion.button>
+
+            {/* Desktop Dots Indicator */}
+            <div className="flex justify-center items-center mt-8 space-x-3">
+              {Array.from({ length: Math.max(1, testimonials.length - 1) }).map(
+                (_, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => goToDesktopSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === desktopCurrentIndex
+                        ? "bg-emerald-500 scale-125"
+                        : "bg-slate-300 hover:bg-slate-400"
+                    }`}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    animate={{
+                      scale: index === desktopCurrentIndex ? [1, 1.2, 1] : 1,
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat:
+                        index === desktopCurrentIndex
+                          ? Number.POSITIVE_INFINITY
+                          : 0,
+                    }}
+                  />
+                )
+              )}
+            </div>
           </div>
         </div>
 

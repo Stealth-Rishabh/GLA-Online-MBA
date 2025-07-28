@@ -20,19 +20,75 @@ import { submitAdmissionQuery } from "@/lib/crm";
 import { toast } from "sonner";
 import { getAllStates, getCitiesForState } from "@/lib/stateData";
 
-const LeadGenerationForm = forwardRef((props, ref) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    coursesid: "OGLAMBA201",
-    state: "",
-    city: "",
-    page: "glaOnlineMBA",
-  });
+const formFields = [
+  {
+    name: "name",
+    label: "Full Name",
+    type: "text",
+    placeholder: "Enter your full name",
+    required: true,
+    validation: (value) => value.trim().length >= 2,
+    errorMessage: "Name must be at least 2 characters long",
+  },
+  {
+    name: "email",
+    label: "Email Address",
+    type: "email",
+    placeholder: "your.email@example.com",
+    required: true,
+    validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+    errorMessage: "Please enter a valid email address",
+  },
+  {
+    name: "phone",
+    label: "Mobile Number",
+    type: "tel",
+    placeholder: "+91 98765 43210",
+    required: true,
+    validation: (value) => /^[6-9][0-9]{9}$/.test(value),
+    errorMessage:
+      "Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9",
+  },
+  {
+    name: "coursesid",
+    type: "hidden",
+    value: "OGLAMBA201",
+  },
+  {
+    name: "state",
+    label: "State",
+    type: "select",
+    placeholder: "Select your state",
+    required: true,
+    validation: (value) => value !== "",
+    errorMessage: "Please select a state",
+    options: getAllStates(),
+  },
+  {
+    name: "city",
+    label: "City",
+    type: "select",
+    placeholder: "Select your city",
+    required: true,
+    validation: (value) => value !== "",
+    errorMessage: "Please select a city",
+    options: [], // Will be populated based on selected state
+  },
+];
 
+const initialFormData = {
+  name: "",
+  email: "",
+  phone: "",
+  coursesid: "OGLAMBA201",
+  state: "",
+  city: "",
+};
+
+const LeadGenerationForm = forwardRef(({ utmParams = {} }, ref) => {
+  const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [cities, setCities] = useState([]);
   const nameInputRef = React.useRef(null);
 
@@ -42,37 +98,6 @@ const LeadGenerationForm = forwardRef((props, ref) => {
       nameInputRef.current?.focus();
     },
   }));
-
-  const formFields = [
-    {
-      name: "name",
-      label: "Full Name",
-      type: "text",
-      placeholder: "Enter your full name",
-      required: true,
-      validation: (value) => value.trim().length >= 2,
-      errorMessage: "Name must be at least 2 characters long",
-    },
-    {
-      name: "email",
-      label: "Email Address",
-      type: "email",
-      placeholder: "your.email@example.com",
-      required: true,
-      validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
-      errorMessage: "Please enter a valid email address",
-    },
-    {
-      name: "phone",
-      label: "Mobile Number",
-      type: "tel",
-      placeholder: "+91 98765 43210",
-      required: true,
-      validation: (value) => /^[6-9][0-9]{9}$/.test(value),
-      errorMessage:
-        "Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9",
-    },
-  ];
 
   const handleChange = (name, value) => {
     let processedValue = value;
@@ -111,19 +136,6 @@ const LeadGenerationForm = forwardRef((props, ref) => {
     return "";
   };
 
-  const handlePhoneBlur = () => {
-    const phone = formData.phone;
-    if (/^[6-9][0-9]{9}$/.test(phone)) {
-      let submittedPhoneNumbers =
-        JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
-      if (submittedPhoneNumbers.includes(phone)) {
-        toast.warning(
-          "Note: This phone number may have already been used in this session."
-        );
-      }
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -133,14 +145,6 @@ const LeadGenerationForm = forwardRef((props, ref) => {
       const error = validateField(field.name, formData[field.name]);
       if (error) newErrors[field.name] = error;
     });
-
-    // Validate state and city
-    if (!formData.state) {
-      newErrors.state = "Please select a state";
-    }
-    if (!formData.city) {
-      newErrors.city = "Please select a city";
-    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -158,31 +162,31 @@ const LeadGenerationForm = forwardRef((props, ref) => {
       return;
     }
 
-    setIsLoading(true);
+    setIsSubmitting(true);
 
     try {
       const sanitizedFormData = {
         ...formData,
         city: formData.city.replace(/\s/g, ""),
-        page: "glaOnlineMBA",
+      };
+      const dataForSheet = {
+        ...sanitizedFormData,
+        campaign: utmParams?.campaign || utmParams?.utm_campaign,
+        utm_source: utmParams?.utm_source || "Stealth", // Use URL parameter instead of hardcoding
+        utm_medium: utmParams?.utm_medium,
+        utm_term: utmParams?.utm_term,
+        utm_content: utmParams?.utm_content,
       };
 
       // PARALLEL API CALLS for faster submission
       const [crmResult, sheetsResponse] = await Promise.all([
-        submitAdmissionQuery(sanitizedFormData, {}),
+        submitAdmissionQuery(sanitizedFormData, utmParams),
         fetch("/api/submit", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            ...sanitizedFormData,
-            campaign: "",
-            utm_source: "Stealth",
-            utm_medium: "",
-            utm_term: "",
-            utm_content: "",
-          }),
+          body: JSON.stringify(dataForSheet),
         }),
       ]);
 
@@ -198,16 +202,9 @@ const LeadGenerationForm = forwardRef((props, ref) => {
             JSON.stringify(submittedPhoneNumbers)
           );
         }
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          coursesid: "OGLAMBA201",
-          state: "",
-          city: "",
-          page: "glaOnlineMBA",
-        });
+        setFormData(initialFormData);
         setErrors({});
+        // Immediate redirect
         window.location.href = "/thankyou.html";
       } else {
         // Handle error case
@@ -223,14 +220,29 @@ const LeadGenerationForm = forwardRef((props, ref) => {
             );
           }
         } else {
-          toast.error("Failed to submit form. Please try again.");
+          toast.error(
+            crmResult.message || "Failed to submit form. Please try again."
+          );
         }
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");
       console.error("Form submission error:", error);
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
+    }
+  };
+
+  const handlePhoneBlur = () => {
+    const phone = formData.phone;
+    if (/^[6-9][0-9]{9}$/.test(phone)) {
+      let submittedPhoneNumbers =
+        JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
+      if (submittedPhoneNumbers.includes(phone)) {
+        toast.warning(
+          "Note: This phone number may have already been used in this session."
+        );
+      }
     }
   };
 
@@ -270,7 +282,7 @@ const LeadGenerationForm = forwardRef((props, ref) => {
             </motion.div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              {formFields.map((field, index) => (
+              {formFields.slice(0, 3).map((field, index) => (
                 <motion.div
                   key={field.name}
                   initial={{ opacity: 0, x: -20 }}
@@ -396,17 +408,17 @@ const LeadGenerationForm = forwardRef((props, ref) => {
               >
                 <Button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={isSubmitting}
                   className="py-3 w-full text-lg font-semibold text-white rounded-lg shadow-lg disabled:opacity-50"
                   style={{
-                    background: isLoading
+                    background: isSubmitting
                       ? "#94a3b8"
                       : "linear-gradient(135deg, #059669, #10b981)",
                     boxShadow: "0 10px 25px rgba(16, 185, 129, 0.15)",
                   }}
                 >
                   <AnimatePresence mode="wait">
-                    {isLoading ? (
+                    {isSubmitting ? (
                       <motion.div
                         key="loading"
                         initial={{ opacity: 0 }}
@@ -415,7 +427,7 @@ const LeadGenerationForm = forwardRef((props, ref) => {
                         className="flex justify-center items-center"
                       >
                         <motion.div
-                          className="mr-2 w-5 h-5 rounded-full border-b-2 border-white"
+                          className="mr-2 w-5 h-5 text-base rounded-full border-b-2 border-white"
                           animate={{ rotate: 360 }}
                           transition={{
                             duration: 1,
@@ -423,7 +435,7 @@ const LeadGenerationForm = forwardRef((props, ref) => {
                             ease: "linear",
                           }}
                         />
-                        Processing...
+                        ⌛Please wait ! Form is Submitting...
                       </motion.div>
                     ) : (
                       <motion.div
@@ -433,7 +445,7 @@ const LeadGenerationForm = forwardRef((props, ref) => {
                         exit={{ opacity: 0 }}
                         className="flex justify-center items-center"
                       >
-                        Submit Now
+                        Submit Query
                         <motion.div
                           animate={{ x: [0, 5, 0] }}
                           transition={{

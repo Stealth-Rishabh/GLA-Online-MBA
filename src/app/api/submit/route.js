@@ -70,54 +70,36 @@ export async function POST(request) {
 
     // Google Apps Script integration
     const googleScriptUrl =
-      "https://script.google.com/macros/s/AKfycby_ttQOhWBpXMuRuYaT-M4cEAxneKAj9fw1mMZEVno4pd_ysy_-GwVKdPxzXIRqtDvrgw/exec";
+      "https://script.google.com/macros/s/AKfycbwNlNdUk0dhyu3rXla1HkHskibDUOjRQ6nXzrB7lFcnsAuJIRUf0Q94FSgGjKG6_mBJ/exec";
 
-    // 1. Check duplicate phone
-    const checkResp = await fetch(googleScriptUrl, {
+    // Add hardcoded page value "gomba.online" to the first column
+    const payload = {
+      ...formData,
+      action: "submitLead",
+      page: "gomba.online", // Hardcoded page value for first column
+    };
+
+    const response = await fetch(googleScriptUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "checkPhone", phone: formData.phone }),
+      body: JSON.stringify(payload),
     });
 
-    if (!checkResp.ok) {
-      throw new Error(`Google Script check failed: ${checkResp.status}`);
-    }
-
-    const checkResult = await checkResp.json();
-    if (checkResult.isDuplicate === true) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          isDuplicate: true,
-          message:
-            "This phone number has already been used to submit an inquiry.",
-        }),
-        {
-          status: 200,
-          headers: { ...headers, "Content-Type": "application/json" },
-        }
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Google Script Error:", errorText);
+      throw new Error(
+        `Google Script submission failed with status: ${response.status}`
       );
     }
 
-    // 2. Write data
-    const writePayload = { ...formData, action: "writeData" };
-    const writeResp = await fetch(googleScriptUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(writePayload),
-    });
+    const result = await response.json();
 
-    if (!writeResp.ok) {
-      throw new Error(`Google Script write failed: ${writeResp.status}`);
-    }
-
-    const writeResult = await writeResp.json();
-
-    if (writeResult.success === true) {
+    if (result.success) {
       return new Response(
         JSON.stringify({
           success: true,
-          message: writeResult.message || "Form submitted successfully.",
+          message: result.message || "Form submitted successfully.",
         }),
         {
           status: 200,
@@ -125,15 +107,17 @@ export async function POST(request) {
         }
       );
     } else {
+      // Let the script dictate the error message and duplicate status
       return new Response(
         JSON.stringify({
           success: false,
+          isDuplicate: result.isDuplicate || false,
           message:
-            writeResult.message ||
-            "Data submission failed due to script error.",
+            result.message || "Data submission failed due to script error.",
         }),
         {
-          status: 500,
+          // The original code used 200 for duplicates, so we stick with that for frontend compatibility.
+          status: result.isDuplicate ? 200 : 500,
           headers: { ...headers, "Content-Type": "application/json" },
         }
       );

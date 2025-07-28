@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 import LeadGenerationForm from "./LeadGenerationForm";
 
-const HeroSection = () => {
+const HeroSection = ({ utmParams = {} }) => {
   const formRef = useRef(null);
 
   return (
@@ -228,7 +228,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Lead Generation Form */}
-          <LeadGenerationForm ref={formRef} />
+          <LeadGenerationForm ref={formRef} utmParams={utmParams} />
         </div>
       </div>
     </section>

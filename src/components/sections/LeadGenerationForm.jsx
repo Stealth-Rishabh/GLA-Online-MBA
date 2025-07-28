@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +20,7 @@ import { submitAdmissionQuery } from "@/lib/crm";
 import { toast } from "sonner";
 import { getAllStates, getCitiesForState } from "@/lib/stateData";
 
-const LeadGenerationForm = () => {
+const LeadGenerationForm = forwardRef((props, ref) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,6 +34,14 @@ const LeadGenerationForm = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [cities, setCities] = useState([]);
+  const nameInputRef = React.useRef(null);
+
+  // Expose the focus method through ref
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      nameInputRef.current?.focus();
+    },
+  }));
 
   const formFields = [
     {
@@ -228,6 +236,7 @@ const LeadGenerationForm = () => {
 
   return (
     <motion.div
+      id="lead-generation-form"
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
@@ -283,6 +292,7 @@ const LeadGenerationForm = () => {
                   >
                     <Input
                       id={field.name}
+                      name={field.name}
                       type={field.type}
                       placeholder={field.placeholder}
                       value={formData[field.name]}
@@ -300,6 +310,7 @@ const LeadGenerationForm = () => {
                       onBlur={
                         field.name === "phone" ? handlePhoneBlur : undefined
                       }
+                      ref={field.name === "name" ? nameInputRef : null}
                     />
                   </motion.div>
                   {errors[field.name] && (
@@ -454,6 +465,6 @@ const LeadGenerationForm = () => {
       </motion.div>
     </motion.div>
   );
-};
+});
 
 export default LeadGenerationForm;

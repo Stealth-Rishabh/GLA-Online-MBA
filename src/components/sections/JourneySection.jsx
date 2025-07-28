@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { scrollToLeadForm } from "@/lib/utils";
 
 // Animation configurations
 const animations = {
@@ -34,12 +35,14 @@ const animations = {
 // Mobile Slider Component
 const MobileSlider = ({ phases }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false); // Start with false
+  const [isInViewport, setIsInViewport] = useState(false); // Track viewport visibility
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const autoPlayRef = useRef(null);
   const sliderRef = useRef(null);
   const touchStartTime = useRef(0);
+  const containerRef = useRef(null); // Add ref for viewport detection
 
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50;
@@ -56,9 +59,42 @@ const MobileSlider = ({ phases }) => {
     setCurrentIndex(index);
   }, []);
 
+  // Viewport detection using Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsInViewport(true);
+            setCurrentIndex(0); // Reset to beginning
+            setIsAutoPlaying(true); // Start auto-play
+          } else {
+            setIsInViewport(false);
+            setIsAutoPlaying(false); // Stop auto-play when out of viewport
+            setCurrentIndex(0); // Reset to beginning when leaving viewport
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the component is visible
+        rootMargin: "0px 0px -50px 0px", // Start a bit before it's fully visible
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
   // Auto-play functionality with performance optimization
   useEffect(() => {
-    if (isAutoPlaying) {
+    if (isAutoPlaying && isInViewport) {
       autoPlayRef.current = setInterval(() => {
         nextSlide();
       }, 3000);
@@ -73,7 +109,7 @@ const MobileSlider = ({ phases }) => {
         clearInterval(autoPlayRef.current);
       }
     };
-  }, [isAutoPlaying, nextSlide]);
+  }, [isAutoPlaying, isInViewport, nextSlide]);
 
   // Optimized touch handlers with better performance
   const onTouchStart = useCallback((e) => {
@@ -102,14 +138,23 @@ const MobileSlider = ({ phases }) => {
       prevSlide();
     }
 
-    // Resume auto-play after 2 seconds
+    // Resume auto-play after 2 seconds only if still in viewport
     setTimeout(() => {
-      setIsAutoPlaying(true);
+      if (isInViewport) {
+        setIsAutoPlaying(true);
+      }
     }, 2000);
-  }, [touchStart, touchEnd, minSwipeDistance, nextSlide, prevSlide]);
+  }, [
+    touchStart,
+    touchEnd,
+    minSwipeDistance,
+    nextSlide,
+    prevSlide,
+    isInViewport,
+  ]);
 
   return (
-    <div className="relative w-full h-fit">
+    <div ref={containerRef} className="relative w-full h-fit">
       {/* Slider Container with hardware acceleration */}
       <div
         ref={sliderRef}
@@ -475,6 +520,7 @@ const BottomCTA = () => (
             background: "linear-gradient(135deg, #059669, #3b82f6)",
             boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
           }}
+          onClick={scrollToLeadForm}
         >
           Enquire Now
           <motion.div

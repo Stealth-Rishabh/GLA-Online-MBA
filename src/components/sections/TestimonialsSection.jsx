@@ -287,7 +287,7 @@ const TestimonialsSection = () => {
             {/* Desktop Navigation Arrows */}
             <motion.button
               onClick={prevDesktopSlide}
-              className="absolute -left-10 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
+              className="absolute left-4 sm:-left-10 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -296,7 +296,7 @@ const TestimonialsSection = () => {
 
             <motion.button
               onClick={nextDesktopSlide}
-              className="absolute -right-10 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
+              className="absolute right-4 sm:-right-10 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -430,9 +430,9 @@ const TestimonialsSection = () => {
             </div>
 
             {/* Navigation Arrows */}
-            {/* <motion.button
+            <motion.button
               onClick={prevSlide}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full  flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -441,12 +441,12 @@ const TestimonialsSection = () => {
 
             <motion.button
               onClick={nextSlide}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full  flex items-center justify-center hover:bg-emerald-50 transition-colors duration-200"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <ChevronRight className="w-5 h-5 text-slate-600" />
-            </motion.button> */}
+            </motion.button>
 
             {/* Dots Indicator */}
             <div className="flex justify-center items-center mt-6 space-x-2">

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Phone } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { scrollToLeadForm } from "@/lib/utils";
 
 const CTASection = () => {
   const stats = [
@@ -56,6 +57,7 @@ const CTASection = () => {
                 background: "linear-gradient(135deg, #059669, #10b981)",
                 boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
               }}
+              onClick={scrollToLeadForm}
             >
               Enquire Now - Limited Seats
               <motion.div
@@ -66,8 +68,6 @@ const CTASection = () => {
               </motion.div>
             </Button>
           </motion.div>
-
-          
         </motion.div>
 
         <motion.div

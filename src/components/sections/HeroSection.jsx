@@ -1,12 +1,15 @@
 "use client";
 
-import { motion,  } from "framer-motion";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 
 import LeadGenerationForm from "./LeadGenerationForm";
 
 const HeroSection = () => {
+  const formRef = useRef(null);
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white sm:h-[calc(100vh-100px)] flex items-center">
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white sm:h-[calc(100vh-100px)] flex items-center mt-20">
       <motion.div
         className="absolute inset-0 bg-center bg-cover opacity-20"
         style={{
@@ -37,7 +40,7 @@ const HeroSection = () => {
               </motion.div> */}
 
               <motion.h1
-                className="text-4xl font-bold leading-normal md:text-5xl lg:text-6xl text-center sm:text-left"
+                className="text-4xl font-semibold sm:font-bold leading-normal md:text-5xl lg:text-6xl text-center sm:text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -70,7 +73,7 @@ const HeroSection = () => {
                       duration: 1,
                       repeat: Infinity,
                       ease: "easeInOut",
-                      repeatDelay: 1
+                      repeatDelay: 1,
                     }}
                   />
                   <span className="ml-1 relative z-10">MBA</span>
@@ -134,7 +137,6 @@ const HeroSection = () => {
                     >
                       ADMISSIONS OPEN 2025
                     </motion.h3>
-                   
                   </div>
                 </div>
               </motion.div>
@@ -203,7 +205,11 @@ const HeroSection = () => {
               transition={{ delay: 1.2, duration: 0.6 }}
             >
               {[
-                { value: "NAAC 'A+'", label: "Accredited University", suffix: "" },
+                {
+                  value: "NAAC 'A+'",
+                  label: "Accredited University",
+                  suffix: "",
+                },
                 { value: "₹1,05,000", label: "(All Inclusive)", suffix: "" },
                 { value: "24", label: "Months", suffix: "" },
               ].map((stat, index) => (
@@ -222,7 +228,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Lead Generation Form */}
-          <LeadGenerationForm />
+          <LeadGenerationForm ref={formRef} />
         </div>
       </div>
     </section>
@@ -230,4 +236,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

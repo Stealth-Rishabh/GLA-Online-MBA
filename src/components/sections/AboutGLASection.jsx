@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Zap, Users, Network, Lightbulb } from "lucide-react";
+import { scrollToLeadForm } from "@/lib/utils";
 
 const AboutGLASection = () => {
   const features = [
@@ -42,7 +43,10 @@ const AboutGLASection = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl text-center sm:text-left font-bold text-slate-800 mb-6">
-              About <span className="text-emerald-600 block sm:inline">GLA Online MBA</span>
+              About{" "}
+              <span className="text-emerald-600 block sm:inline">
+                GLA Online MBA
+              </span>
             </h2>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed text-center sm:text-left">
               Experience world-class education designed for the modern
@@ -96,6 +100,7 @@ const AboutGLASection = () => {
                     background: "linear-gradient(135deg, #059669, #10b981)",
                     boxShadow: "0 10px 25px rgba(5, 150, 105, 0.3)",
                   }}
+                  onClick={scrollToLeadForm}
                 >
                   Enquire Now
                   <motion.div
@@ -143,11 +148,13 @@ const AboutGLASection = () => {
               whileInView={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
               viewport={{ once: true }}
-              className="absolute -top-6 -right-6 bg-white p-6 rounded-xl shadow-lg"
+              className="absolute -top-6 -right-4 sm:-right-6 border bg-white p-6 rounded-xl shadow-lg"
               whileHover={{ scale: 1.05, y: -5 }}
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-emerald-600">No Cost EMI</div>
+                <div className="text-2xl font-bold text-emerald-600">
+                  No Cost EMI
+                </div>
                 <div className="text-sm text-slate-600">Payment Options</div>
               </div>
             </motion.div>
@@ -157,7 +164,7 @@ const AboutGLASection = () => {
               whileInView={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               viewport={{ once: true }}
-              className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg"
+              className="absolute -bottom-6 -left-4 sm:-left-6 border bg-white p-6 rounded-xl shadow-lg"
               whileHover={{ scale: 1.05, y: -5 }}
             >
               <div className="text-center">

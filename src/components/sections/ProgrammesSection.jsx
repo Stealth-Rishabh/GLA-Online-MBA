@@ -27,6 +27,14 @@ const ProgrammesSection = () => {
       icon: TrendingUp,
     },
     {
+      title: "Human Resource Management",
+      description:
+        "Learn talent acquisition, organizational behavior, and strategic HR planning",
+      image:
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Users,
+    },
+    {
       title: "Financial Management",
       description:
         "Develop expertise in corporate finance, investment strategies, and financial analysis",
@@ -35,12 +43,12 @@ const ProgrammesSection = () => {
       icon: DollarSign,
     },
     {
-      title: "Human Resource Management",
+      title: "Information Technology Management",
       description:
-        "Learn talent acquisition, organizational behavior, and strategic HR planning",
+        "Bridge technology and business with IT strategy, digital transformation, and project management",
       image:
-        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=250&fit=crop&crop=center&q=80",
-      icon: Users,
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Settings,
     },
     {
       title: "Operations Management",
@@ -51,20 +59,12 @@ const ProgrammesSection = () => {
       icon: Settings,
     },
     {
-      title: "International Business",
+      title: "Banking & Financial Services",
       description:
-        "Navigate global markets, cross-cultural management, and international trade strategies",
+        "Navigate banking operations, risk management, and financial service innovation",
       image:
-        "https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=800&h=600&fit=crop&crop=center",
-      icon: Globe,
-    },
-    {
-      title: "Digital Marketing",
-      description:
-        "Master SEO, social media marketing, content strategy, and digital analytics",
-      image:
-        "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=250&fit=crop&crop=center&q=80",
-      icon: Smartphone,
+        "https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: DollarSign,
     },
     {
       title: "Business Analytics",
@@ -75,12 +75,12 @@ const ProgrammesSection = () => {
       icon: BarChart3,
     },
     {
-      title: "Entrepreneurship",
+      title: "Supply Chain Management",
       description:
-        "Build startups, innovation management, and venture capital fundamentals",
+        "Master logistics, procurement strategies, and global supply chain optimization",
       image:
-        "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&h=250&fit=crop&crop=center&q=80",
-      icon: Lightbulb,
+        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=250&fit=crop&crop=center&q=80",
+      icon: Globe,
     },
   ];
 

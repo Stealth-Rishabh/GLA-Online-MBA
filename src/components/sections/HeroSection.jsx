@@ -126,11 +126,11 @@ const HeroSection = ({ utmParams = {} }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
               >
-                <div className="flex gap-3 items-start animate-pulse">
+                <div className="flex gap-3 items-center justify-center animate-pulse">
                   {/*  */}
                   <div>
                     <motion.h3
-                      className="font-bold text-emerald-700 font-serif text-3xl text-center"
+                      className="font-bold text-emerald-700 font-serif text-xl text-center"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 1, duration: 0.5 }}

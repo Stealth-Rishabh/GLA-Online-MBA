@@ -120,37 +120,6 @@ const RecruitersSection = () => {
             </motion.div>
           ))}
         </div>
-{/* 
-        <motion.div
-          className="mt-16 grid md:grid-cols-3 gap-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          {stats.map((item, index) => (
-            <motion.div
-              key={index}
-              className="text-center bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-50  p-8 rounded-xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <motion.div
-                className={`w-16 h-16 bg-gradient-to-br from-${item.color}-100 to-${item.color}-200 rounded-2xl flex items-center justify-center mx-auto mb-4 `}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <item.icon className={`w-8 h-8 text-${item.color}-600`} />
-              </motion.div>
-              <h4 className="text-3xl font-bold text-emerald-900 mb-2">
-                {item.title}
-              </h4>
-              <p className="text-slate-600">{item.desc}</p>
-            </motion.div>
-          ))}
-        </motion.div> */}
       </div>
     </AnimatedSection>
   );

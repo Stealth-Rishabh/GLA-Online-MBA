@@ -130,7 +130,7 @@ const HeroSection = ({ utmParams = {} }) => {
                   {/*  */}
                   <div>
                     <motion.h3
-                      className="font-bold text-emerald-700 font-serif text-xl text-center"
+                      className="font-bold text-emerald-700 text-xl text-center"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 1, duration: 0.5 }}

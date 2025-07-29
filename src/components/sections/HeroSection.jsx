@@ -199,7 +199,7 @@ const HeroSection = ({ utmParams = {} }) => {
             </motion.div> */}
 
             <motion.div
-              className="hidden items-center pt-2 space-x-8 sm:flex"
+              className=" items-center pt-2 space-x-8 flex hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}

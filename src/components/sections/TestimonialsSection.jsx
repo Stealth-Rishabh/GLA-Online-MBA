@@ -59,6 +59,9 @@ const TestimonialsSection = () => {
 
   // Desktop slider state
   const [desktopCurrentIndex, setDesktopCurrentIndex] = useState(0);
+  const [isDesktopAutoPlaying, setIsDesktopAutoPlaying] = useState(true);
+  const [isDesktopPaused, setIsDesktopPaused] = useState(false);
+  const desktopAutoPlayRef = useRef(null);
   const desktopContainerRef = useRef(null);
 
   // Navigation functions
@@ -99,7 +102,7 @@ const TestimonialsSection = () => {
     [testimonials.length]
   );
 
-  // Auto-play functionality with pause on hover
+  // Auto-play functionality for mobile with pause on hover
   useEffect(() => {
     if (isAutoPlaying && !isPaused) {
       autoPlayRef.current = setInterval(() => {
@@ -118,13 +121,41 @@ const TestimonialsSection = () => {
     };
   }, [isAutoPlaying, isPaused, nextSlide]);
 
-  // Pause/Resume handlers
+  // Auto-play functionality for desktop with pause on hover
+  useEffect(() => {
+    if (isDesktopAutoPlaying && !isDesktopPaused) {
+      desktopAutoPlayRef.current = setInterval(() => {
+        nextDesktopSlide();
+      }, 4000); // Slightly longer interval for desktop
+    } else {
+      if (desktopAutoPlayRef.current) {
+        clearInterval(desktopAutoPlayRef.current);
+      }
+    }
+
+    return () => {
+      if (desktopAutoPlayRef.current) {
+        clearInterval(desktopAutoPlayRef.current);
+      }
+    };
+  }, [isDesktopAutoPlaying, isDesktopPaused, nextDesktopSlide]);
+
+  // Pause/Resume handlers for mobile
   const handleMouseEnter = useCallback(() => {
     setIsPaused(true);
   }, []);
 
   const handleMouseLeave = useCallback(() => {
     setIsPaused(false);
+  }, []);
+
+  // Pause/Resume handlers for desktop
+  const handleDesktopMouseEnter = useCallback(() => {
+    setIsDesktopPaused(true);
+  }, []);
+
+  const handleDesktopMouseLeave = useCallback(() => {
+    setIsDesktopPaused(false);
   }, []);
 
   // Touch handlers for mobile
@@ -190,8 +221,8 @@ const TestimonialsSection = () => {
           <div
             ref={desktopContainerRef}
             className="relative"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={handleDesktopMouseEnter}
+            onMouseLeave={handleDesktopMouseLeave}
           >
             {/* Slider Container */}
             <div className="overflow-hidden p-8">

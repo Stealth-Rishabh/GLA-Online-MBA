@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Header from "@/components/sections/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import RankingSection from "@/components/sections/RankingSection";
 import ProgrammesSection from "@/components/sections/ProgrammesSection";
@@ -10,7 +9,6 @@ import RecruitersSection from "@/components/sections/RecruitersSection";
 import JourneySection from "@/components/sections/JourneySection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
-import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   const [utmParams, setUtmParams] = useState({});
@@ -35,7 +33,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white overflow-x-hidden">
-      <Header />
       <HeroSection utmParams={utmParams} />
       <AboutGLASection />
       <ProgrammesSection />
@@ -44,7 +41,6 @@ export default function Home() {
       <JourneySection />
       <TestimonialsSection />
       <CTASection />
-      <Footer />
     </div>
   );
 }

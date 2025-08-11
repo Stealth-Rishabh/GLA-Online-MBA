@@ -9,7 +9,7 @@ const HeroSection = ({ utmParams = {} }) => {
   const formRef = useRef(null);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white sm:h-[calc(100vh-100px)] flex items-center mt-20">
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white sm:h-[calc(100vh-100px)] flex items-center mt-[34px]">
       <motion.div
         className="absolute inset-0 bg-center bg-cover opacity-20"
         style={{

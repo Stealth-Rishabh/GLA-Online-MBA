@@ -32,7 +32,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white overflow-hidden">
       <HeroSection utmParams={utmParams} />
       <AboutGLASection />
       <ProgrammesSection />

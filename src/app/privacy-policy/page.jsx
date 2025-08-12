@@ -33,10 +33,10 @@ export default function PrivacyPolicyPage() {
           <Card className="w-full">
             <CardContent className="p-6 md:p-8 space-y-8">
               <p className="text-muted-foreground leading-relaxed">
-                GO MBA is committed to protecting the privacy of our
-                website visitors, students, applicants, and users. This Privacy
-                Policy explains what information we collect, how we use it, and
-                the choices you have.
+                GO MBA is committed to protecting the privacy of our website
+                visitors, students, applicants, and users. This Privacy Policy
+                explains what information we collect, how we use it, and the
+                choices you have.
               </p>
 
               <Separator />
@@ -46,12 +46,16 @@ export default function PrivacyPolicyPage() {
                 title="Scope"
               >
                 <p>
-                  This policy applies to personally identifiable information
-                  collected via GO MBA’s official website and related
-                  online services, as well as information provided to us by
-                  authorized third parties. It does not cover practices of
-                  entities we do not own or control, or individuals we do not
-                  employ or manage.
+                  Welcome to Go MBA from GLA Online, a subsidiary/brand of GLA
+                  University. We are committed to protecting the privacy of our
+                  visitors and users. This Privacy Policy explains how we
+                  collect, use, disclose, and safeguard your information when
+                  you visit our website glaonline.com and interact with our
+                  services. This policy applies only to our online activities
+                  and to information shared and/or collected on our website. By
+                  using our Site, you signify your acceptance of this Privacy
+                  Policy. If you do not agree to this policy, please do not use
+                  our Site.
                 </p>
               </PolicySection>
 
@@ -226,9 +230,9 @@ export default function PrivacyPolicyPage() {
                 title="Your Consent"
               >
                 <p>
-                  By using the GO MBA website and services, you consent
-                  to the collection and use of information as described in this
-                  Privacy Policy.
+                  By using the GO MBA website and services, you consent to the
+                  collection and use of information as described in this Privacy
+                  Policy.
                 </p>
               </PolicySection>
 
@@ -280,5 +284,5 @@ function PolicySection({ icon, title, children }) {
         {children}
       </div>
     </section>
-    );
+  );
 }

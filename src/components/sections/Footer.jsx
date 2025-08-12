@@ -7,7 +7,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-slate-900 text-white py-8">
-      <div className="container flex justify-between items-center sm:max-w-6xl md:max-w-7xl mx-auto px-4">
+      <div className="container flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center sm:max-w-6xl md:max-w-7xl mx-auto px-4">
         <motion.div
           className=" text-center text-sm text-slate-400"
           initial={{ opacity: 0 }}

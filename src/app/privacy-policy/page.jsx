@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
           <Card className="w-full">
             <CardContent className="p-6 md:p-8 space-y-8">
               <p className="text-muted-foreground leading-relaxed">
-                GLA University is committed to protecting the privacy of our
+                GO MBA is committed to protecting the privacy of our
                 website visitors, students, applicants, and users. This Privacy
                 Policy explains what information we collect, how we use it, and
                 the choices you have.
@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
               >
                 <p>
                   This policy applies to personally identifiable information
-                  collected via GLA University’s official website and related
+                  collected via GO MBA’s official website and related
                   online services, as well as information provided to us by
                   authorized third parties. It does not cover practices of
                   entities we do not own or control, or individuals we do not
@@ -226,7 +226,7 @@ export default function PrivacyPolicyPage() {
                 title="Your Consent"
               >
                 <p>
-                  By using the GLA University website and services, you consent
+                  By using the GO MBA website and services, you consent
                   to the collection and use of information as described in this
                   Privacy Policy.
                 </p>

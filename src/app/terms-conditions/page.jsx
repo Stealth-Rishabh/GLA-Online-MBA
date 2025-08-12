@@ -23,13 +23,13 @@ const termsContent = [
   {
     title: "Right to Modify Content",
     content:
-      "GLA University reserves the right, at its sole discretion, to edit, update, or delete any information, content, or materials posted on the website without prior notice.",
+      "GO MBA reserves the right, at its sole discretion, to edit, update, or delete any information, content, or materials posted on the website without prior notice.",
     icon: FilePenLine,
   },
   {
     title: "Indemnification",
     content:
-      "By using this website, you agree to indemnify, defend, and hold harmless GLA University, its affiliates, partners, employees, and representatives (“Affiliated Parties”) from any claims, losses, liabilities, damages, and expenses (including legal fees) arising out of your misuse of the site, violation of these terms, or infringement of any rights of a third party.",
+      "By using this website, you agree to indemnify, defend, and hold harmless GO MBA, its affiliates, partners, employees, and representatives (“Affiliated Parties”) from any claims, losses, liabilities, damages, and expenses (including legal fees) arising out of your misuse of the site, violation of these terms, or infringement of any rights of a third party.",
     icon: Shield,
   },
   {
@@ -41,7 +41,7 @@ const termsContent = [
   {
     title: "Disclaimer of Warranties and Liability",
     content:
-      "The content and services on this website may contain errors, inaccuracies, or technical issues. GLA University and its affiliated parties shall not be held liable for any direct, indirect, incidental, special, or consequential damages arising from your use of or inability to use the website or any content therein. This includes, but is not limited to, loss of business, data, revenue, or profits, even if we were advised of the possibility of such damages. The limitations of liability are essential to the agreement between you and GLA University and reflect an understanding of risk allocation.",
+      "The content and services on this website may contain errors, inaccuracies, or technical issues. GO MBA and its affiliated parties shall not be held liable for any direct, indirect, incidental, special, or consequential damages arising from your use of or inability to use the website or any content therein. This includes, but is not limited to, loss of business, data, revenue, or profits, even if we were advised of the possibility of such damages. The limitations of liability are essential to the agreement between you and GO MBA and reflect an understanding of risk allocation.",
     icon: AlertTriangle,
   },
   {
@@ -59,13 +59,13 @@ const termsContent = [
   {
     title: "Third-Party Links",
     content:
-      "The GLA University website may contain links to third-party websites for your convenience. We do not monitor or review the content of external websites and are not responsible for their content, accuracy, or any opinions expressed therein. The inclusion of such links does not imply our endorsement. Users who access these external sites do so at their own risk.",
+      "The GO MBA website may contain links to third-party websites for your convenience. We do not monitor or review the content of external websites and are not responsible for their content, accuracy, or any opinions expressed therein. The inclusion of such links does not imply our endorsement. Users who access these external sites do so at their own risk.",
     icon: ExternalLink,
   },
   {
     title: "Information & Press Releases",
     content:
-      "The website may include press releases or announcements concerning GLA University. While we endeavor to ensure that the information is accurate at the time of publication, we do not commit to updating it regularly. Information regarding other entities should not be considered as being endorsed or verified by GLA University.",
+      "The website may include press releases or announcements concerning GO MBA. While we endeavor to ensure that the information is accurate at the time of publication, we do not commit to updating it regularly. Information regarding other entities should not be considered as being endorsed or verified by GO MBA.",
     icon: Newspaper,
   },
   {
@@ -120,7 +120,7 @@ export default function TermsAndConditionsPage() {
           <CardContent className="p-8 md:p-12">
             <div className="space-y-12">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                By accessing and using the official website of GLA University,
+                By accessing and using the official website of GO MBA,
                 you agree to comply with and be bound by the following terms and
                 conditions. Please read them carefully. If you do not agree with
                 these terms, you are advised not to access or use the site.
